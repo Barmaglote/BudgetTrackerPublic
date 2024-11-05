@@ -1,0 +1,8 @@
+<div *ngIf="!hideCookieAlert" class="cookie-alert flex flex-row p-4 w-6 max-w-20rem absolute bottom-0 surface-ground shadow-4 align-items-center border-round-2xl m-5 right-0">
+  <div class="w-10 flex">
+    <p>We use cookies to store your personal information.</p>
+  </div>
+  <div class="w-2 flex">
+    <p-button (click)="closeCookieAlert()" class="cursor-pointer">Ok</p-button>
+  </div>
+</div>

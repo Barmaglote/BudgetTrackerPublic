@@ -1,0 +1,111 @@
+<div class="px-4 py-8 md:px-6 lg:px-8" *ngIf="{isPremium : isPremium$ | async, premiumSubscribtion: premiumSubscribtion$ | async } as obs">
+  <div class="text-900 font-bold text-6xl mb-4 text-center text-black-alpha-80">{{'upgrade.title' | transloco}}</div>
+  <div class="text-700 text-xl mb-6 text-center line-height-3">{{'upgrade.description' | transloco}}</div>
+  <div class="grid">
+      <div class="col-12 lg:col-6">
+          <div class="p-3 h-full">
+              <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">{{'upgrade.plans.basic.title' | transloco}}</div>
+                  <div class="text-600">{{'upgrade.plans.premium.description' | transloco}}</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center">
+                      <span class="font-bold text-2xl text-900">{{'upgrade.plans.basic.price' | transloco}}</span>
+                      <span class="ml-2 font-medium text-600"></span>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.01' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.02' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.03' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.04' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.05' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.06' | transloco}}</span>
+                      </li>
+                      <li class="flex align-items-center mb-3">
+                        <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                        <span class="text-900">{{'upgrade.plans.basic.07' | transloco}}</span>
+                      </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border mt-auto" />
+                  <button pButton pRipple label="Free" [disabled]="obs.isPremium === false || !obs.premiumSubscribtion?.subscribtionId" (click)="unsubscribe(obs.premiumSubscribtion?.subscribtionId)" class="p-3 w-full mt-auto"></button>
+              </div>
+          </div>
+      </div>
+
+      <div class="col-12 lg:col-6">
+          <div class="p-3 h-full">
+              <div class="shadow-2 p-3 h-full flex flex-column surface-card" style="border-radius: 6px">
+                  <div class="text-900 font-medium text-xl mb-2">{{'upgrade.plans.premium.title' | transloco}}</div>
+                  <div class="text-600">{{'upgrade.plans.premium.description' | transloco}}</div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <div class="flex align-items-center">
+                      <span class="font-bold text-2xl text-900">{{'upgrade.plans.premium.price' | transloco}}</span>
+                      <span class="ml-2 font-medium text-600">{{'upgrade.per-month' | transloco}}</span>
+                  </div>
+                  <hr class="my-3 mx-0 border-top-1 border-none surface-border" />
+                  <ul class="list-none p-0 m-0 flex-grow-1">
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.01' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.02' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.03' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.04' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.05' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.06' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.07' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.08' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.09' | transloco}}</span>
+                    </li>
+                    <li class="flex align-items-center mb-3">
+                      <i class="pi pi-check-circle text-green-500 mr-2"></i>
+                      <span class="text-900">{{'upgrade.plans.premium.10' | transloco}}</span>
+                    </li>
+                  </ul>
+                  <hr class="mb-3 mx-0 border-top-1 border-none surface-border" />
+                  <button pButton pRipple label="Buy now" class="p-3 w-full" (click)="openPayment()" [disabled]="obs.isPremium === true && obs.premiumSubscribtion?.subscribtionId !== null"></button>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

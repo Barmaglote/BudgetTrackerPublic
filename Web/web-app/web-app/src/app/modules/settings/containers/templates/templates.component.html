@@ -1,0 +1,25 @@
+<app-card data-testid="templates-card">
+  <div class="w-full flex flex-wrap px-2" *transloco="let t; read: 'settings.templates'">
+    <div class="col-6 px-4">
+      <div class="flex flex-column w-full">
+        <h3>{{t('templates')}}</h3>
+        <label for="templates">{{t('existing')}}</label>
+        <p-listbox id="templates" data-testid="listbox-templates" [options]="(templates$ | async) || []" [(ngModel)]="selectedTemplate" (onChange)="onSelectTemplate()" optionLabel="title" [filter]="true" [className]="'w-full py-2'" [listStyle]="{'max-height': '220px'}"></p-listbox>
+    </div>
+    </div>
+    <div class="col-6 px-4">
+      <form [formGroup]="templatesForm" (ngSubmit)="onSave()" class="w-full">
+        <div class="flex flex-column w-full">
+          <h3>{{t('edit')}}</h3>
+          <app-templates-editor formControlName="item" [categories]="(categories$ | async) || []" [accounts]="(accounts$ | async) || []"></app-templates-editor>
+        </div>
+        <div class="flex justify-content-start w-full py-4 gap-2">
+          <button pButton [label]="t('save')" data-testid="templates-button-save" class="p-button" icon="pi pi-save" type="submit" [disabled]="!currentItemInForm?.title || !currentItemInForm?.accountId"></button>
+          <button pButton [label]="t('new')" class="p-button p-button-success" icon="pi pi-file" (click)="onNew()" type="button"></button>
+          <button pButton [label]="t('delete')" class="p-button p-button-danger" icon="pi pi-trash" (click)="onDelete()" type="button"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

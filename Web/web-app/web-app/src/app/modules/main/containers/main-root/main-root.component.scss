@@ -1,0 +1,18 @@
+:host ::ng-deep {
+.p-menu, .p-breadcrumb {
+  width: 100%;
+  border: 0;
+  background-color: transparent;
+  }
+}
+
+:host ::ng-deep {
+  .p-breadcrumb .p-menuitem-text, .p-menuitem-separator{
+    font-weight: 500;
+    color: antiquewhite;
+  }
+
+  .p-breadcrumb .p-menuitem-icon {
+    color: black;
+  }
+}

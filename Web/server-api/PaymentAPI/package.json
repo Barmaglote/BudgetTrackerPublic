@@ -1,0 +1,42 @@
+{
+  "name": "paymentapi",
+  "version": "1.0.0",
+  "description": "Payment Service",
+  "main": "server.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "test"
+  },
+  "keywords": [
+    "Payment",
+    "Stripe",
+    "Money"
+  ],
+  "author": "Evgeniy Danilchenko",
+  "license": "ISC",
+  "dependencies": {
+    "@datalust/winston-seq": "^2.0.0",
+    "@stripe/stripe-js": "^4.0.0",
+    "amqplib": "^0.10.4",
+    "bcrypt": "^5.1.1",
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2",
+    "google-auth-library": "^9.13.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.4.4",
+    "ohmyfetch": "^0.4.21",
+    "request": "^2.88.2",
+    "swagger-ui-express": "^5.0.1",
+    "tslib": "^2.6.3",
+    "winston": "^3.13.0"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.3",
+    "eslint": "^9.5.0",
+    "nodemon": "^3.1.4",
+    "stripe": "^16.1.0"
+  }
+}

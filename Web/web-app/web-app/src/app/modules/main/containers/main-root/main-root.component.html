@@ -1,0 +1,64 @@
+<div class="flex flex-column overflow-y-visible h-full">
+  <div class="w-full z-1 fixed" style="height: 4px;">
+    <app-loader></app-loader>
+  </div>
+  <p-sidebar [(visible)]="sidebarVisible">
+    <ng-template pTemplate="header">
+      <div class="i-logo h-4rem w-15rem m-2"></div>
+    </ng-template>
+    <ng-template pTemplate="content">
+      <div class="card flex justify-content-center">
+        <p-panelMenu [model]="items" [style]="{'width':'300px'}" [multiple]="true"></p-panelMenu>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="footer">
+      <div class="w-full flex flex-column align-items-center">
+      <div class="text-800">I Love Dubai Corporation</div>
+      <div class="text-sm">{{env.version}}</div>
+      </div>
+    </ng-template>
+  </p-sidebar>
+  <div class="card w-full z-1">
+    <div class="flex flex-wrap justify-content-between text-black p-3 align-content-center">
+      <div class="flex align-content-center px-2 justify-content-center flex-wrap gap-4">
+        <div class="flex justify-content-center flex-wrap align-content-center">
+          <p-button (click)="sidebarVisible = true" icon="pi pi-bars" [className]="'p-0 p-button-rounded p-button border-0 shadow-4 bg-white'" [style]="{background:'transparent', color: 'blue', border:0, borderRadius: '50%' }"></p-button>
+        </div>
+        <div class="flex justify-content-center flex-wrap align-content-center">
+          <app-breadcrumbs></app-breadcrumbs>
+        </div>
+      </div>
+      <div class="flex flex-wrap gap-3">
+        <div class="flex justify-content-center flex-wrap align-content-center">
+
+        </div>
+        <div class="flex justify-content-center flex-wrap align-content-center">
+          <app-user-button class="z-1" [headerTemplate]="headerTemplate">
+          </app-user-button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="w-full h-full">
+    <router-outlet></router-outlet>
+  </div>
+</div>
+
+<ng-template #headerTemplate>
+  <div *ngIf="{
+    user: (user$ | async),
+    incomeCurrency: (incomeCurrency$ | async) || '',
+    expensesCurrency: (expensesCurrency$ | async) || '',
+    income: (briefStatistics$ | async)?.lastIncome?.quantity || 0,
+    expenses: (briefStatistics$ | async)?.lastExpense?.quantity || 0,
+    } as obs">
+    <app-account-state [user]="obs.user" *ngIf="obs.user"
+    [incomeCurrency]="obs.incomeCurrency"
+    [expensesCurrency]="obs.incomeCurrency"
+    [income]="obs.income"
+    [expenses]="obs.expenses"
+    class="w-20rem"></app-account-state>
+  </div>
+</ng-template>
+<app-cookie-alert></app-cookie-alert>

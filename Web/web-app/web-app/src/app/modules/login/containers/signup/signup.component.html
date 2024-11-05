@@ -1,0 +1,7 @@
+<div class="flex align-items-center justify-content-center">
+  <div class="w-full lg:w-6 p-4 lg:p-7">
+    <app-card [header]="'login.sign_up' | transloco">
+      <app-signup-form (submit)="onSubmit($event)"></app-signup-form>
+    </app-card>
+  </div>
+</div>

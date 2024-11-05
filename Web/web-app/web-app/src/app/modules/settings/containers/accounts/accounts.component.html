@@ -1,0 +1,25 @@
+<app-card *transloco="let t; read: 'settings.accounts'" data-testid="card-accounts">
+  <div class="w-full flex flex-wrap px-2">
+    <div class="col-6 px-4">
+      <div class="flex flex-column w-full">
+        <h3>{{t('accounts')}}</h3>
+        <label for="accounts">{{t('existing')}}</label>
+        <p-listbox id="accounts" data-testid="listbox-accounts" [options]="(accounts$ | async) || []" [(ngModel)]="selected" (onChange)="onSelect()" optionLabel="title" [filter]="true" [className]="'w-full py-2'" [listStyle]="{'max-height': '220px'}"></p-listbox>
+    </div>
+    </div>
+    <div class="col-6 px-4">
+      <form [formGroup]="accountsForm" (ngSubmit)="onSave()" class="w-full">
+        <div class="flex flex-column w-full">
+          <h3>{{t('edit')}}</h3>
+          <app-accounts-editor formControlName="item"></app-accounts-editor>
+        </div>
+        <div class="flex justify-content-start w-full py-4 gap-2">
+          <button pButton label="Save" class="p-button" icon="pi pi-save" type="submit" [disabled]="!currentItemInForm?.title || (currentItemInForm?.accountType === null || currentItemInForm?.accountType === undefined) || !currentItemInForm?.currency" data-testid="accounts-button-save"></button>
+          <button pButton label="New" class="p-button  p-button-success" icon="pi pi-file" (click)="onNew()" type="button" [disabled]="((accounts$ | async) || []).length >= 10"></button>
+          <button pButton label="Delete" class="p-button p-button-danger" icon="pi pi-trash" (click)="onDelete()" type="button" data-testid="accounts-button-delete"></button>
+        </div>
+      </form>
+    </div>
+  </div>
+</app-card>
+<p-confirmDialog [style]="{ width: '450px' }"></p-confirmDialog>

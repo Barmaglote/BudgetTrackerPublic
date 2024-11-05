@@ -1,0 +1,1 @@
+docker build -t budget-tracker-api:0.2.0 -f Dockerfile .

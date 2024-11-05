@@ -1,0 +1,19 @@
+<div class="flex align-items-center justify-content-center w-full p-3 w-12">
+  <div class="flex align-items-center justify-content-center w-full p-3 w-12 lg:w-4 sm:w-12">
+    <app-card header="{{'payment.failed.title' | transloco}}">
+      <div class="card flex">
+        {{'payment.failed.error' | transloco}}
+      </div>
+      <div class="flex align-items-center w-full gap-2 my-5 text-2xl font-semibold">
+        <div><i class="pi pi-times-circle" style="font-size: 2em; color: red;"></i></div>
+        <div>{{'payment.failed.message' | transloco}}</div>
+      </div>
+      <div>
+        <p>{{'payment.failed.try-again' | transloco}}</p>
+      </div>
+      <div>
+        <a pButton type="button" label="{{'payment.failed.return' | transloco}}" icon="pi pi-home" routerLink="/user"></a>
+      </div>
+    </app-card>
+  </div>
+</div>

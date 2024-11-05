@@ -1,0 +1,20 @@
+<div class="w-full flex flex-wrap align-items-center max-h-20rem overflow-auto" *transloco="let t; read: 'credits'" pTooltip="Repayment: {{repayment | currency:currency:'symbol-narrow'}}, Overpayment: {{overpayment | currency:currency:'symbol-narrow'}}">
+  <div class="flex {{columnWidthClass}} p-1" *ngFor="let payment of paymentPlan" [class.cursor-pointer]="!isReadOnly">
+    <div class="flex flex-row w-full border-0 border-round-xl p-2 border-300 shadow-1 surface-50 text-sm" (click)="onClick(payment)" [class.bg-gray-200]="isReadOnly">
+      <div class="w-5 align-items-center flex text-xs">
+        {{payment.month}}. {{payment.date | date:'dd.MM.yyyy'}}
+      </div>
+      <div class="w-5 font-semibold align-items-center flex">
+        {{payment.quantity | currency:currency:'symbol-narrow'}}
+      </div>
+      <div class="w-2 font-semibold">
+        <button pButton (click)="makePayment(payment)" type="button" [pTooltip]="'Make payment'" *ngIf="!payment.isPaid && isReadOnly" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded bg-yellow-100" icon="pi pi-wallet"></button>
+        <button pButton [disabled]="true" type="button" *ngIf="payment.isPaid && isReadOnly" class="p-button p-button-round surface-0 border-0 text-100 p-button-rounded bg-green-500" icon="pi pi-wallet"></button>
+      </div>
+    </div>
+  </div>
+  <div class="flex w-12 p-1 gap-2 text-sm align-items-center justify-content-center" *ngIf="paymentPlan && paymentPlan.length > 0">
+    <div>{{t('repayment')}}: <span class="font-semibold">{{repayment | currency:currency:'symbol-narrow'}}</span></div>
+    <div>{{t('overpayment')}}: <span class="font-semibold">{{overpayment | currency:currency:'symbol-narrow'}}</span></div>
+  </div>
+</div>

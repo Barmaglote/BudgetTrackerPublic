@@ -1,0 +1,12 @@
+bind_addr = ":7673"
+log_level = "debug"
+mail_buffer_size = 100
+template_folder = "./web/templates/mail/"
+templates = [ 
+    { name = "Confirmation", subject = "Password confirmation", files = ["confirmation.page.tmpl", "base.layout.tmpl"] },
+    { name = "ChangePasswordRequest", subject = "Password change request", files = ["change-password-request.page.tmpl", "base.layout.tmpl"] },
+    { name = "ConfirmationPasswordChange", subject = "Your password is confirmed", files = ["confirmation-password-change.page.tmpl", "base.layout.tmpl"] },
+ ]
+smtp_addr = "smtp.mailtrap.io:2525"
+smtp_host = "smtp.mailtrap.io"
+mail_sender = "xxx@xxx.com"

@@ -1,0 +1,52 @@
+<div class="flex flex-wrap w-full justify-content-between flex align-content-between min-w-min px-2" *transloco="let t; read: 'credits'">
+  <div class="justify-content-top align-items-start flex-1 w-full grid m-0">
+    <div class="col-9 flex flex-wrap gap-3">
+      <app-card class="w-full" [header]="t('total')">
+        <div class="w-full flex" *ngIf="{statistics: (generalCreditsStatistics$ | async), totalCount: (totalCount$ | async), isAllActiveOrEmpty: (isAllActiveOrEmpty$ | async)} as generalCreditsStatistics">
+          <div class="w-2">
+            {{t('active_credits')}}: {{generalCreditsStatistics.statistics?.activeCredits}}
+          </div>
+          <div class="w-10 flex flex-wrap" *ngIf="generalCreditsStatistics.statistics?.debt">
+            {{t('total_debts')}}:&nbsp;
+            <span *ngFor="let debtItem of Object.keys(generalCreditsStatistics.statistics?.debt || []); let last=last">
+              {{generalCreditsStatistics.statistics?.debt?.[debtItem] | currency:debtItem:'symbol-narrow'}}<span *ngIf="!last">;&nbsp;</span>
+            </span>
+            <p-messages [(value)]="messages" [enableService]="false" [closable]="true" class="w-full" *ngIf="!generalCreditsStatistics.isAllActiveOrEmpty && generalCreditsStatistics.totalCount != 0"></p-messages>
+          </div>
+        </div>
+      </app-card>
+      <app-card class="w-full">
+        <app-credits-table
+          *ngIf="{items : (items$ | async), totalCount: (totalCount$ | async)} as obs"
+          [items]="obs.items || []"
+          (loadData)="onLoadData($event)"
+          (activate)="onActivate($event)"
+          [totalRecords]="obs.totalCount || 0"
+          [title]="t('credits')"
+          [accounts]="(accounts$ | async) || []"
+          (update)="onItemUpdate($event)"
+          (delete)="onDelete($event)"
+          (transfer)="onTransfer($event)"
+          (info)="onInfo($event)"
+          class="w-full">
+        </app-credits-table>
+      </app-card>
+    </div>
+    <div class="col-3 gap-3 flex flex-column">
+      <app-card class="w-full" [header]="t('credits')">
+        <app-page-menu [items]="pageMenuItems" [info]="t('infomessage')"></app-page-menu>
+      </app-card>
+      <app-card class="w-full" [header]="t('next_payments')" *ngIf="(payments$ | async)">
+        <app-next-payments [accounts]="(accounts$ | async) || []" [payments]="(payments$ | async) || []" (transfer)="onTransfer($event)"></app-next-payments>
+      </app-card>
+      <app-card class="w-full" [header]="t('tips')">
+        <app-advices class="border-0 border-transparent" [financialTips]="financialTips"></app-advices>
+      </app-card>
+    </div>
+  </div>
+</div>
+<p-dialog [header]="'credits.add.new' | transloco" [(visible)]="isAddItemVisible" [modal]="true" [style]="{ width: '30vw', minWidth: '30rem', minHeight: '35rem' }" [draggable]="true" [resizable]="false">
+  <app-add-credit (add)="onAdd($event)" [accounts]="(creditAccounts$ | async) || []" [categories]="(categories$ | async) || []"></app-add-credit>
+</p-dialog>
+<p-toast></p-toast>
+

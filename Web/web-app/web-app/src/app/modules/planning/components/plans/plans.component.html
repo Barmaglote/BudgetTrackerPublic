@@ -1,0 +1,24 @@
+<div class="w-full flex flex-column gap-2">
+  <div *ngFor="let plannedItem of plans; let i = index" class="w-full flex flex-column">
+    <div class="flex flex-row w-full border-0 border-round-xl p-2 border-300 shadow-1 surface-50 text-sm">
+      <div class="w-10 flex flex-wrap">
+        <div class="col-6 align-items-center flex">
+          {{i+1}}. {{plannedItem.date | date:'dd.MM.yyyy'}}
+          <p-tag *ngIf="plannedItem.area" [severity]="plannedItem.area === 'income' ? 'success': 'warning'" [value]="plannedItem.area" [ngClass]="'mx-2'"></p-tag>
+        </div>
+        <div class="col-6 font-semibold align-items-center flex">
+          {{plannedItem.quantity | currency:plannedItem.currency:'symbol-narrow'}}
+        </div>
+        <div class="col-12 align-items-center flex" *ngIf="plannedItem.comment">
+          {{plannedItem.comment}}
+        </div>
+      </div>
+      <div class="w-2 font-semibold flex flex-column justify-content-center align-items-end p-3">
+        <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(plannedItem)"></p-menu>
+        <button pButton type="button" *ngIf="!plannedItem.isPaid" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+        <button pButton type="button" *ngIf="plannedItem.isPaid" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded bg-green-100" icon="pi pi-wallet"></button>
+      </div>
+    </div>
+  </div>
+</div>
+

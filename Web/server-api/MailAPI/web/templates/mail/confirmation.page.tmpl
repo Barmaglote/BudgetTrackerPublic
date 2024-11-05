@@ -1,0 +1,16 @@
+{{template "base" .}}
+{{define "title"}}
+    New password confirmation
+{{end}}
+{{define "comment"}}
+    Dear {{.Snippet.Username}}! Please confirm your password!
+{{end}}
+{{define "buttontext"}}
+    Confirm
+{{end}}
+{{define "link"}}
+    https://localhost:4200/login/confirmation?token={{.Snippet.Confirmation}}&login={{.Snippet.Email}}
+{{end}}
+{{define "commentifwrong"}}
+    If you did not request to set a new password, simply ignore this email.
+{{end}}

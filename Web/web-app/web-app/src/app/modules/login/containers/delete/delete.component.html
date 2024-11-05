@@ -1,0 +1,10 @@
+<div class="flex align-items-center justify-content-center">
+  <div class="w-full lg:w-6 p-4 lg:p-7">
+    <app-card [header]="'login.account' | transloco">
+      {{'login.delete_is_not_available' | transloco}}
+      <div class="w-full flex justify-content-end p-2">
+        <p-button label="Back" icon="pi pi-directions-alt" (click)="backClicked()"></p-button>
+      </div>
+    </app-card>
+  </div>
+</div>

@@ -1,0 +1,34 @@
+<div class="" *transloco="let t; read: 'item'">
+  <div class="field flex-column flex">
+    <label for="account">{{t('filter.account')}}</label>
+    <p-multiSelect
+      inputId="account"
+      *ngIf="accounts"
+      [options]="accounts"
+      [(ngModel)]="selectedAccounts"
+      optionLabel="title"
+      [showClear]="true"
+      [required]="true"
+      [appendTo]="'body'"
+      [styleClass]="'w-full'"
+      [appendTo]="'body'"
+      placeholder="Select account">
+    </p-multiSelect>
+  </div>
+  <div class="field flex-column flex">
+    <label for="comment">{{t('filter.category')}}</label>
+    <p-multiSelect [options]="categories" [(ngModel)]="selectedCategories" optionLabel="category" [style]="{width: '100%'}" [appendTo]="'body'"></p-multiSelect>
+  </div>
+  <div class="field flex-column flex">
+    <label for="comment">{{t('filter.comment')}}</label>
+    <input id="comment" type="text" [(ngModel)]="comment" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+  </div>
+  <div class="field flex-column flex">
+    <label for="date">{{t('filter.date')}}</label>
+    <p-calendar [(ngModel)]="rangeDates" selectionMode="range" [minDate]="minDate" [readonlyInput]="true" [showIcon]="true" [appendTo]="'body'"></p-calendar>
+  </div>
+  <div class="flex gap-2">
+    <button pButton label="Search" class="p-button" icon="pi pi-filter" (click)="onSearch()"></button>
+    <button pButton label="Clear" class="p-button-outlined" icon="pi pi-filter-slash" (click)="onReset()"></button>
+  </div>
+</div>

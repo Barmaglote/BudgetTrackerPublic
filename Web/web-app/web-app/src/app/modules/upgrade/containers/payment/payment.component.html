@@ -1,0 +1,14 @@
+<div class="flex align-items-center justify-content-center w-full p-3 w-12" *ngIf="{ plan : (plan$ | async) } as obs">
+  <div class="flex align-items-center justify-content-center w-full p-3 w-12 lg:w-4 sm:w-12 h-full">
+    <app-card [header]="'Payment'" class="w-full">
+      <div class="w-full h-auto flex align-content-between flex-wrap">
+        <app-plan-info [plan]="obs.plan" *ngIf="obs.plan" class="w-full"></app-plan-info>
+        <div id="card-element" class="w-full p-3 m-3 h-3rem"></div>
+        <div class="w-full flex flex-row gap-1 justify-content-end">
+          <p-button (onClick)="onSubmit()" *ngIf="isVisible" class="scalein">Pay</p-button>
+          <p-button (onClick)="onCancel()" severity="warning">Cancel</p-button>
+        </div>
+      </div>
+    </app-card>
+  </div>
+</div>

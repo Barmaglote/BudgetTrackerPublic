@@ -1,0 +1,11 @@
+<p-dropdown
+  [options]="currencyOptions"
+  [(ngModel)]="selectedCurrency"
+  optionLabel="label"
+  optionValue="value"
+  [appendTo]="'body'"
+  [filter]="true"
+  filterBy="label"
+  (onChange)="onCurrencyChange()"
+  placeholder="Select a currency">
+</p-dropdown>

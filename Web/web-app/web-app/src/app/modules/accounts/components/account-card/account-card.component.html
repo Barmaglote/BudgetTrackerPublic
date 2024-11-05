@@ -1,0 +1,70 @@
+<div class="p-3 h-full w-full h-16rem gap-3 flex flex-column" *transloco="let t; read: 'item'">
+  <div class="w-full flex flex-row h-5rem">
+    <div class="w-10 flex flex-column">
+      <div class="text-xl font-semibold text-overflow-ellipsis cursor-pointer hover:underline" (click)="selectInfo.emit(item)">{{item.title}}</div>
+      <div class="text-sm">{{item.comment}}</div>
+      <div class="text-sm">
+        <p-tag [severity]="(item.accountType === AccountType.credit || item.accountType === AccountType.creditCard) ? 'warning' : 'success'" [value]="getAccountTypeText(item.accountType)"></p-tag>
+      </div>
+    </div>
+    <div class="w-2 flex justify-content-end ">
+      <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(item)"></p-menu>
+      <button pButton type="button" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+    </div>
+  </div>
+  <div class="w-full flex flex-column h-3rem">
+    <div class="w-full" *ngIf="(this.credits$ | async) && (item.accountType == AccountType.credit || item.accountType == AccountType.creditCard) && debtPlanned !== 0">
+      <p-progressBar
+        [value]="debtPaid >= debtPlanned ? 100 : Math.round(debtPaid/debtPlanned * 100)"
+        class="w-full" [showValue]="false" [style]="{height:'4px'}"
+        [color]="(Math.round(debtPaid/debtPlanned * 100) < 20)
+                  ? 'red'
+                  : (Math.round(debtPaid/debtPlanned * 100) < 50
+                    ? 'orange'
+                    : (Math.round(debtPaid/debtPlanned * 100) < 95 ? 'yellow' : 'green')
+                    )">
+      </p-progressBar>
+      <div class="flex w-full flex-wrap justify-content-between text-600">
+        <div class="flex">{{debtPaid >= debtPlanned ? 100 : Math.round(debtPaid/debtPlanned * 100)}}%</div>
+        <div class="flex">{{debtPlanned | currency:item.currency:'symbol-narrow'}}</div>
+      </div>
+    </div>
+    <div class="w-full" *ngIf="item.goal && item.accountType !== AccountType.credit && item.accountType !== AccountType.creditCard">
+      <p-progressBar
+        [value]="item.goal > item.quantity ? Math.round(item.quantity/item.goal * 100) : 100"
+        class="w-full"
+        [showValue]="false"
+        [style]="{height:'4px'}"
+        [color]="(Math.round(item.quantity/item.goal * 100) < 20)
+                  ? 'red'
+                  : (Math.round(item.quantity/item.goal * 100) < 50
+                    ? 'orange'
+                    : (Math.round(item.quantity/item.goal * 100) < 95 ? 'yellow' : 'green')
+                    )">
+      </p-progressBar>
+      <div class="flex w-full flex-wrap justify-content-between text-600">
+        <div class="flex">{{item.goal > item.quantity ? Math.round(item.quantity/item.goal * 100) : 100}}%</div>
+        <div class="flex">{{item.goal | currency:item.currency:'symbol-narrow'}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="w-full flex flex-row h-5rem">
+    <div class="w-7" *ngIf="{diff: ((difference$ | async) || 0)} as result">
+      <div class="text-3xl font-bold text-900" *ngIf="item && item.currency">{{item.quantity | currency:item.currency:'symbol-narrow'}}</div>
+      <div class="text-3xl font-bold text-900" *ngIf="item && !item.currency">{{item.quantity}}</div>
+      <div
+        [class.text-green-500]="result.diff > 0"
+        [class.text-yellow-500]="result.diff == 0"
+        [class.text-red-500]="result.diff < 0"
+        *ngIf="item">
+          <span class="font-medium" *ngIf="item && item.currency">{{result.diff | currency:item.currency:'symbol-narrow'}}</span>
+          <span class="font-medium" *ngIf="item && !item.currency">{{result.diff}}</span>
+          <i class="pi text-xs ml-2" [class.pi-arrow-up]="result.diff > 0" [class.pi-arrow-down]="result.diff < 0" *ngIf="result.diff !== 0"></i>
+      </div>
+      <div class="w-12"><span class="font-normal text-400 text-xs" *ngIf="oneMonthAgo">{{t('since')}} {{oneMonthAgo | date:'dd.MM.yyyy'}}</span></div>
+    </div>
+    <div class="w-5">
+      <app-statistics-by-date-plain [statisticsIncome$]="statisticsForIncome$" [statisticsExpenses$]="statisticsForExpenses$"></app-statistics-by-date-plain>
+    </div>
+  </div>
+</div>

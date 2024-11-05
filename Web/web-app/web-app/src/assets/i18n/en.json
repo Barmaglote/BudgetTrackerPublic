@@ -1,0 +1,595 @@
+{
+  "primeng": {
+    "startsWith": "Starts with",
+    "contains": "Contains",
+    "notContains": "Not contains",
+    "endsWith": "Ends with",
+    "equals": "Equals",
+    "notEquals": "Not equals",
+    "noFilter": "No Filter",
+    "lt": "Less than",
+    "lte": "Less than or equal to",
+    "gt": "Greater than",
+    "gte": "Greater than or equal to",
+    "is": "Is",
+    "isNot": "Is not",
+    "before": "Before",
+    "after": "After",
+    "dateIs": "Date is",
+    "dateIsNot": "Date is not",
+    "dateBefore": "Date is before",
+    "dateAfter": "Date is after",
+    "clear": "Clear",
+    "apply": "Apply",
+    "matchAll": "Match All",
+    "matchAny": "Match Any",
+    "addRule": "Add Rule",
+    "removeRule": "Remove Rule",
+    "accept": "Yes",
+    "reject": "No",
+    "choose": "Choose",
+    "upload": "Upload",
+    "cancel": "Cancel",
+    "dayNames": ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+    "dayNamesShort": ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
+    "dayNamesMin": ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"],
+    "monthNames": ["January", "February", "March", "April", "May", "June", "July", "August", "September1", "October", "November", "December"],
+    "monthNamesShort": ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+    "today": "Today",
+    "weekHeader": "Wk",
+    "weak": "Weak",
+    "medium": "Medium",
+    "strong": "Strong",
+    "passwordPrompt": "Enter a password",
+    "emptyMessage": "No results found",
+    "emptyFilterMessage": "No results found"
+  },
+  "exceptions": {
+    "API_NOT_AVAILABLE": "The API service is currently unavailable. Please try again later or contact your local representative.",
+    "FAILED_TO_ADD_DATA": "Failed to add data.",
+    "FAILED_TO_GET_SETTINGS": "Failed to get settings",
+    "FAILED_TO_DELETE_DATA": "Failed to delete data.",
+    "FAILED_TO_GET_DATA": "Failed to get data",
+    "UNSPECIFIED_ERROR": "Unspecified error",
+    "Internal_Server_Error": "Internal Server Error",
+    "Bad_Request": "Bad requests",
+    "FAILED_TO_SIGN_IN": "Failed to sign in",
+    "FAILED_TO_CHANGE_PASSWORD": "Failed to change password"
+  },
+  "authentication": {
+    "welcome": "Welcome, {{user}}"
+  },
+  "item": {
+    "since": "since",
+    "info": {
+      "quantity": "Quantity",
+      "comment": "Comment",
+      "isRegular": "Regular",
+      "date": "Date",
+      "id": "Id",
+      "account": "Account"
+    },
+    "table": {
+      "newIncome": "New Income",
+      "quantity": "Quantity",
+      "comment": "Comment",
+      "category": "Category",
+      "action": "Action",
+      "date": "Date",
+      "isregular": "Regular",
+      "income": "Income",
+      "expenses": "Expenses",
+      "account": "Account"
+    },
+    "add": {
+      "new": "New",
+      "quantity": "Quantity",
+      "comment": "Comment",
+      "category": "Category",
+      "date": "Date",
+      "template": "Template",
+      "account": "Account",
+      "area": "Area"
+    },
+    "filter": {
+      "comment": "Comment",
+      "category": "Category",
+      "date": "Date",
+      "account": "Account",
+      "filter": "Filter"
+    },
+    "store": {
+      "itemsIsStored": "Item has been saved"
+    },
+    "stats": {
+      "structure": "Structure",
+      "dynamics": "Dynamics"
+    },
+    "chart": {
+      "notavailable": "Not available for multiple accounts"
+    },
+    "tips":"Tips",
+    "income_management":"Income Management: Track, Record, and Analyze Your Revenues for Effective Financial Management."
+  },
+  "settings": {
+    "language": "Language",
+    "locale": "Locale",
+    "categories": {
+      "incorrectValue": "Incorrect value",
+      "income": "Income",
+      "expenses": "Expenses",
+      "credits": "Credits",
+      "save": "Save",
+      "new": "New",
+      "delete": "Delete"
+    },
+    "templates": {
+      "templates": "Templates",
+      "edit": "Edit",
+      "title": "Title",
+      "regular": "Regular",
+      "comment": "Comment",
+      "category": "Category",
+      "quantity": "Quantity",
+      "existing": "Existing",
+      "save": "Save",
+      "new":"New",
+      "delete":"Delete"
+    },
+    "accounts": {
+      "accounts": "Accounts",
+      "edit": "Edit",
+      "title": "Title",
+      "comment": "Comment",
+      "initial": "Initial",
+      "accountType": "Account Type",
+      "currency": "Currency",
+      "goal": "Goal",
+      "limit": "Limit",
+      "existing": "Existing"
+    },
+    "info": {
+      "settingHasBeenUpdated": "Settings has been updated"
+    },
+    "options": "Options"
+  },
+  "accounts": {
+    "noItems": "No accounts are create. You can create accounts in the Settings",
+    "transfers": "Transfers",
+    "accounts": "Accounts",
+    "structure":"Structure",
+    "tips": "Tips",
+    "info": "Info",
+    "income": "Income",
+    "expenses": "Expenses",
+    "infomessage": "Manage all your accounts in one place",
+    "transfer": "Transfer",
+    "id": "Id",
+    "date":"Date",
+    "from": "From account",
+    "to": "To account",
+    "withdraw": "Withdraw",
+    "deposit": "Deposit",
+    "initial": "Initial",
+    "current": "Current"
+  },
+  "transfer": {
+    "add": {
+      "date": "Date",
+      "new": "New transfer",
+      "fromAccount": "From",
+      "toAccount": "To",
+      "fromQuantity": "Withdraw",
+      "toQuantity": "Deposit"
+    }
+  },
+  "credits": {
+    "credits":"Credits",
+    "add":{
+      "new": "New credit",
+      "account": "Account",
+      "category": "Category",
+      "months": "Months",
+      "rate": "Rate",
+      "comment": "Comment",
+      "date": "Date",
+      "period": "Months",
+      "quantity": "Quantity",
+      "repayment": "Repayment",
+      "status": "Status",
+      "mandatory": "Lump sum payment",
+      "isIncluded": "Monthly",
+      "autoUpdate": "Auto update",
+      "active": "Active"
+    },
+    "store": {
+      "itemsIsStored" :"Item has been saved"
+    },
+    "activate": {
+      "transferMoney": "Transfer money?",
+      "account": "Account"
+    },
+    "total": "Total",
+    "active_credits": "Active credits",
+    "total_debts": "Total debts",
+    "infomessage": "Income Management: Track, Record and Analyze Your Income for Effective Financial Management.",
+    "next_payments": "Next payments",
+    "tips": "Tips",
+    "credit": "Credit",
+    "payments_plan": "Payments plan",
+    "repayment": "Repayment",
+    "overpayment": "Overpayment",
+    "interest_paid": "Interest paid",
+    "modify_payment": "Modify payment",
+    "some_credits_are_not_active": "Some credits are not active"
+  },
+  "reports": {
+    "regularPayments": "Regular payments",
+    "item": "Item",
+    "category": "Category",
+    "jan": "Jan",
+    "feb": "Feb",
+    "mar": "Mar",
+    "apr": "Apr",
+    "may": "May",
+    "jun": "Jun",
+    "jul": "Jul",
+    "aug": "Aug",
+    "sep": "Sep",
+    "oct": "Oct",
+    "nov": "Nov",
+    "dec": "Dec",
+    "total": "Total",
+    "incomes":"Income",
+    "expenses": "Expenses",
+    "reports": "Reports",
+    "credits": "Credits"
+  },
+  "menu": {
+    "categories": "Categories",
+    "accounts": "Accounts",
+    "language": "Language",
+    "templates": "Templates",
+    "income": "Income",
+    "expenses": "Expenses",
+    "manage_accounts": "Manage Accounts",
+    "new_transfer": "New Transfer",
+    "credits": "Credits",
+    "reports": "Reports",
+    "planning": "Planning",
+    "description": {
+      "accounts": "Manage your financial accounts, add new accounts, view balance, and transaction history for each account.",
+      "income": "Keep track of your monthly and additional sources of income. Add incomes from various sources and monitor your overall income.",
+      "expenses": "Track all your expenses, categorize them, and monitor where you spend the most. Plan your budget more effectively.",
+      "credits": "Manage your loans and credits. Make payments, track remaining balances, and monitor repayment schedules.",
+      "planning": "Create and track your financial goals, set budgets for specific expense categories, and monitor their progress.",
+      "reports": "Receive detailed reports about your financial status, analyze trends, and draw conclusions for more effective financial management."
+    }
+
+
+  },
+  "planning": {
+    "calendar": "Calendar",
+    "regualar": "Regular payments",
+    "next_payments": "Next payments",
+    "planning": "Planning",
+    "tips": "Tips",
+    "income": "Income",
+    "expenses": "Expenses"
+  },
+  "general": {
+    "take_control_of_your_finances": "Take control of your finances",
+    "budget_tracking": "Budget Tracking",
+    "full_functionality_for_free": "Full functionality for free"
+  },
+  "login": {
+    "login_to_badget_tracker": "Login to Budget Tracker",
+    "sign_in_with_facebook": "Sign in with Facebook",
+    "sign_up": "Sign up",
+    "email": "Email",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "remember_me": "Remember me",
+    "forgot_password": "Forgot password?",
+    "sign_in": "Sign in",
+    "or": "OR",
+    "title": "Title",
+    "confirmation": "Confirmation",
+    "restore": "Restore",
+    "confirm": "Confirm",
+    "your_account_has_been_registred": "Youre account has been registred. Please confirm your email and sign in.",
+    "link_to_restore_password_is_sent_to_your_e-mail": "Link to restore password is sent to your e-mail",
+    "link_to_confirm_new_password_is_sent_to_your_e-mail": "Link to confirm new password is sent to your e-mail",
+    "new_user": "New user",
+    "new_password": "New password",
+    "new_password_confirmation": "New password (confirm)",
+    "password_was_has_been_changed": "Password was has been changed",
+    "change_password": "Change passord",
+    "account_and_password_are_confirmed": "Account and password are confirmed",
+    "delete_is_not_available": "Account delete function temporary is not available",
+    "account": "Account"
+  },
+  "financialTips": {
+    "item": [
+      {
+        "Title": "Budgeting",
+        "Tips": [
+          "Develop a monthly budget, including all your expenses and income.",
+          "Track your financial transactions to understand where your money is going."
+        ]
+      },
+      {
+        "Title": "Spending Priorities",
+        "Tips": [
+          "Set priorities for your spending, prioritizing essential needs over desired purchases.",
+          "Categorize expenses into mandatory, necessary, and additional to better plan your budget."
+        ]
+      },
+      {
+        "Title": "Saving on Everyday Expenses",
+        "Tips": [
+          "Look for ways to save on everyday expenses, such as food, transportation, and entertainment.",
+          "Consider using discounts, deals, and loyalty programs to reduce expenses."
+        ]
+      },
+      {
+        "Title": "Financial Goals",
+        "Tips": [
+          "Set specific financial goals, such as savings for emergencies, vacations, or large purchases.",
+          "Develop a plan to achieve your financial goals and monitor its implementation."
+        ]
+      },
+      {
+        "Title": "Avoiding Excess",
+        "Tips": [
+          "Avoid excess and unnecessary spending, considering the necessity of each purchase.",
+          "Prefer quality over quantity and make thoughtful purchases."
+        ]
+      },
+      {
+        "Title": "Regular Budget Review",
+        "Tips": [
+          "Periodically review your budget, taking into account changes in income and expenses.",
+          "Make adjustments to the budget to reflect your current financial situation."
+        ]
+      },
+      {
+        "Title": "Financial Education",
+        "Tips": [
+          "Invest time in financial education to better understand your options and make informed financial decisions.",
+          "Read books, attend webinars, and consult with financial experts when necessary."
+        ]
+      }
+    ],
+    "accounts": [
+      {
+        "Title": "Create a Budget",
+        "Tips": [
+          "Define your monthly expenses and income.",
+          "Divide your budget into categories (groceries, housing, transportation, entertainment, etc.)."
+        ]
+      },
+      {
+        "Title": "Open Different Accounts",
+        "Tips": [
+          "Separate your accounts into several categories, such as checking account, savings account, emergency fund account, etc."
+        ]
+      },
+      {
+        "Title": "Keep Cash for Small Expenses",
+        "Tips": [
+          "Allocate a certain amount for cash expenses each month.",
+          "Use cash for small purchases and expenses to avoid excessive card usage."
+        ]
+      },
+      {
+        "Title": "Currency Diversification",
+        "Tips": [
+          "If you have accounts in different currencies, place money in the currency that is most convenient for current expenses or investments.",
+          "Consider possible fluctuations in currency exchange rates and plan your actions accordingly."
+        ]
+      },
+      {
+        "Title": "Create an Emergency Fund",
+        "Tips": [
+          "Set aside a certain percentage of income into a savings account that will be used only in case of emergencies."
+        ]
+      },
+      {
+        "Title": "Invest",
+        "Tips": [
+          "Consider investment opportunities to increase your capital.",
+          "Diversification of investments will help reduce risks."
+        ]
+      },
+      {
+        "Title": "Track Your Expenses",
+        "Tips": [
+          "Use banking apps or financial tools to track your expenses.",
+          "Analyse your spending to identify areas where you can save."
+        ]
+      },
+      {
+        "Title": "Plan for Retirement",
+        "Tips": [
+          "Consider setting up a retirement account or investments to ensure financial stability in old age."
+        ]
+      },
+      {
+        "Title": "Assess Your Debts",
+        "Tips": [
+          "Regularly assess your debts and work on paying them off.",
+          "Avoid accumulating high-interest debts."
+        ]
+      },
+      {
+        "Title": "Review Your Financial Goals",
+        "Tips": [
+          "Periodically review your financial goals and adjust your strategies according to changes in life circumstances."
+        ]
+      }
+    ],
+    "planning": [
+      {
+        "Title": "Budgeting",
+        "Tips": [
+          "Develop a monthly budget, including all your expenses and income.",
+          "Track your financial transactions to understand where your money is going."
+        ]
+      },
+      {
+        "Title": "Spending Priorities",
+        "Tips": [
+          "Set priorities for your spending, prioritizing essential needs over desired purchases.",
+          "Categorize expenses into mandatory, necessary, and additional to better plan your budget."
+        ]
+      },
+      {
+        "Title": "Saving on Everyday Expenses",
+        "Tips": [
+          "Look for ways to save on everyday expenses, such as food, transportation, and entertainment.",
+          "Consider using discounts, deals, and loyalty programs to reduce expenses."
+        ]
+      },
+      {
+        "Title": "Financial Goals",
+        "Tips": [
+          "Set specific financial goals, such as savings for emergencies, vacations, or large purchases.",
+          "Develop a plan to achieve your financial goals and monitor its implementation."
+        ]
+      },
+      {
+        "Title": "Avoiding Excess",
+        "Tips": [
+          "Avoid excess and unnecessary spending, considering the necessity of each purchase.",
+          "Prefer quality over quantity and make thoughtful purchases."
+        ]
+      },
+      {
+        "Title": "Regular Budget Review",
+        "Tips": [
+          "Periodically review your budget, taking into account changes in income and expenses.",
+          "Make adjustments to the budget to reflect your current financial situation."
+        ]
+      },
+      {
+        "Title": "Financial Education",
+        "Tips": [
+          "Invest time in financial education to better understand your options and make informed financial decisions.",
+          "Read books, attend webinars, and consult with financial experts when necessary."
+        ]
+      }
+  ],
+    "credits": [
+      {
+        "Title": "Credit Management",
+        "Tips": [
+          "Assess your financial capability before taking out a loan: consider monthly incomes and mandatory expenses.",
+          "Compare the terms of various credit offers, including interest rates, terms, and additional costs."
+        ]
+      },
+      {
+        "Title": "Contract Examination",
+        "Tips": [
+          "Thoroughly examine the contract before signing, paying attention to hidden conditions and penalties."
+        ]
+      },
+      {
+        "Title": "Debt-to-Income Ratio",
+        "Tips": [
+          "Strive to maintain a debt payment to income ratio that does not exceed 30%."
+        ]
+      },
+      {
+        "Title": "Timely Repayment",
+        "Tips": [
+          "Repay loans on time to avoid penalties and improve your credit history."
+        ]
+      },
+      {
+        "Title": "Alternative Options",
+        "Tips": [
+          "Consider alternative financing options such as credit unions or peer-to-peer lending platforms."
+        ]
+      },
+      {
+        "Title": "Purchase Planning",
+        "Tips": [
+          "Plan major purchases in advance to avoid unexpected credit obligations."
+        ]
+      },
+      {
+        "Title": "Professional Advice",
+        "Tips": [
+          "Seek professional advice when needed, especially when choosing mortgage loans or major investments."
+        ]
+      }
+    ]
+  },
+  "shared": {
+    "are-you-sure-you-want-to-change-the-currency": "Are you sure you want to change the currency?",
+    "are-you-sure-you-want-to-change-the-type": "Are you sure you want to change the type?",
+    "confirmation": "Confirmation"
+  },
+  "upgrade": {
+    "title": "Pricing Plan",
+    "description": "Choose the perfect plan for your needs!",
+    "per-month": "per month",
+    "plans": {
+      "basic": {
+        "title": "Basic",
+        "price": "Free",
+        "description": "Basic functionality, enough for beginning",
+        "01": "Accounts management",
+        "02": "Credits management",
+        "03": "Tabular reports",
+        "04": "Max credits 100",
+        "05": "Max accounts 10",
+        "06": "Max templates 50",
+        "07": "Max categories 100"
+      },
+      "premium": {
+        "title": "Premium",
+        "price": "19$",
+        "description": "Everything you need for an advanced user",
+        "01": "Accounts management",
+        "02": "Credits management",
+        "03": "Tabular reports",
+        "04": "Max credits 200",
+        "05": "Max accounts 50",
+        "06": "Max templates 200",
+        "07": "Max categories 200",
+        "08": "Priority support",
+        "09": "Advanced statistics",
+        "10": "Educational materials"
+      }
+    }
+  },
+  "payment": {
+    "back-to-main-page": "Back to main page",
+    "failed": {
+      "error": "Error during payment!",
+      "message": "Unfortunately, an error occurred while processing your payment.",
+      "try-again": "Please try again. If the problem persists, please contact our support team.",
+      "return": "Return to main page",
+      "title":"Payment error"
+    },
+    "success": {
+      "title":"Payment success",
+      "message": "Your transaction was successfully completed.",
+      "thank-you": "Thank you for your payment!",
+      "return": "Return to main page",
+      "payment-recieved": "We have received your payment and will process your order soon.",
+      "contact-us": "If you have any questions, please contact our customer support."
+    },
+    "unsubscribe": {
+      "title":"Success",
+      "message": "Your subscription was canceled.",
+      "thank-you": "Thank you for remaining our client!",
+      "return": "Return to main page",
+      "result": "Your subscription was canceled. You can renew your subscription at any time convenient for you.",
+      "contact-us": "If you have any questions, please contact our customer support."
+    },
+    "currency": "Currency"
+  }
+}

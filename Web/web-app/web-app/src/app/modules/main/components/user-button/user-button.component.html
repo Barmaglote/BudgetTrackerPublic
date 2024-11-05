@@ -1,0 +1,7 @@
+<p-splitButton icon="pi pi-user" [appendTo]="'body'" (onClick)="goHome()" [model]="(menuItems$ | async) || []" styleClass="p-button-raised p-button-text surface-0 z-1">
+  <ng-template pTemplate="content">
+    <div class="w-auto">
+      <ng-template *ngIf="headerTemplate" [ngTemplateOutlet]="headerTemplate" ></ng-template>
+    </div>
+  </ng-template>
+</p-splitButton>

@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import "primeicons/primeicons.css";
+@import 'primeng/resources/themes/saga-blue/theme.css';
+@import 'primeng/resources/primeng.min.css';
+@import 'primeicons/primeicons.css';
+@import '~material-icons/iconfont/material-icons.css';
+@import './styles/global/icons';
+@import './styles/global/menu-icons';
+
+body {
+  margin: 0px;
+}
+
+.gradient-background {
+  background: rgba(237, 223, 92, 0.86);
+  background: -webkit-linear-gradient(298deg, rgba(237, 223, 92, 0.86) 0%, rgba(240, 150, 24, 0.84) 100%);
+  background: linear-gradient(298deg, rgba(237, 223, 92, 0.86) 0%, rgba(240, 150, 24, 0.84) 100%);
+  background-attachment: fixed;
+}

@@ -1,0 +1,25 @@
+<p-card *ngIf="plan" styleClass="shadow-1 m-3">
+  <ng-template pTemplate="header">
+    <div class="flex flew-wrap gap-3 align-items-center justify-content-center p-2">
+      <div class="i-icons-payment-stripe h-5rem w-5rem"></div>
+      <div class="i-icons-payment-mastercard h-5rem w-5rem"></div>
+      <div class="i-icons-payment-visa h-5rem w-5rem"></div>
+      <div class="i-icons-payment-paypal h-5rem w-5rem"></div>
+    </div>
+  </ng-template>
+
+  <h2 class="text-2xl font-bold mb-3">{{plan.title}}</h2>
+  <p class="text-lg mb-4">{{plan.description}}</p>
+
+  <div class="flex flex-column align-items-center">
+    <span class="text-3xl font-bold text-primary mb-2" *ngIf="plan.currency">
+      {{(plan.price / 100) | currency:plan.currency.toUpperCase():'symbol-narrow'}}
+    </span>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <p class="text-sm text-color-secondary mt-3">
+      {{'payment.currency' | transloco}}: {{plan.currency}}
+    </p>
+  </ng-template>
+</p-card>

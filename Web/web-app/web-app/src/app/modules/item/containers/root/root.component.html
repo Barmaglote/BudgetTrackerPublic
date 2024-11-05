@@ -1,0 +1,55 @@
+<div class="flex flex-wrap w-full justify-content-between flex align-content-between min-w-min px-2" *transloco="let t; read: 'item'">
+  <div class="justify-content-top align-items-start flex-1 w-full grid m-0">
+    <div class="col-9 flex flex-wrap gap-3" *ngIf="{ staticsticsByCategory: (staticsticsByCategory$ | async), categories: (categoriesColored$ | async) } as bo">
+      <app-card class="w-full" data-testid="card-main-table">
+        <app-table
+          *ngIf="{items : (sortedItems$ | async), totalCount: (totalCount$ | async)} as obs"
+          [items]="obs.items || []"
+          (loadData)="onLoadData($event)"
+          [totalRecords]="obs.totalCount || 0"
+          [categories]="bo.categories || []"
+          (delete)="onDelete($event)"
+          (update)="onUpdate($event)"
+          (info)="onInfo($event)"
+          [title]="('item.table.' + ((area$ | async) || 'undefined')) | transloco"
+          [accounts]="(accounts$ | async) || []"
+          (infoTransaction)="onInfoTransaction($event)"
+          (rollbackTransaction)="onRollbackTransaction($event)"
+          class="w-full">
+        </app-table>
+      </app-card>
+    </div>
+    <div class="col-3 gap-3 flex flex-column">
+      <app-card class="w-full" [header]="t('filter.filter')" data-testid="card-filter">
+        <app-filter (search)="onFilter($event)" [categories]="(categoriesColored$ | async) || []" [accounts]="(accounts$ | async) || []"></app-filter>
+      </app-card>
+      <app-card class="w-full" [header]="t('table.' + ((area$ | async) || 'undefined'))" data-testid="card-page-menu">
+        <app-page-menu [items]="pageMenuItems" [info]="t('income_management')"></app-page-menu>
+      </app-card>
+      <app-card class="w-full" [header]="t('table.' + ((area$ | async) || 'undefined'))" data-testid="card-statistics">
+        <p-tabView>
+          <p-tabPanel [header]="t('stats.structure')">
+            <app-statistics-by-category *ngIf="(selectedAccounts$ | async)?.length === 1" class="m-1" [Statistics$]="staticsticsByCategory$" [Categories$]="categoriesColored$"></app-statistics-by-category>
+            <div class="w-full flex flex-wrap align-items-center justify-content-center h-5rem" *ngIf="(selectedAccounts$ | async)?.length !== 1">
+              {{t('chart.notavailable')}}
+            </div>
+          </p-tabPanel>
+          <p-tabPanel [header]="t('stats.dynamics')">
+            <app-statistics-by-date class="m-1" *ngIf="(selectedAccounts$ | async)?.length === 1" [Statistics$]="staticsticsByDate$" [Categories$]="categoriesColored$"></app-statistics-by-date>
+            <div class="w-full flex flex-wrap align-items-center justify-content-center h-5rem" *ngIf="(selectedAccounts$ | async)?.length !== 1">
+              {{t('chart.notavailable')}}
+            </div>
+          </p-tabPanel>
+        </p-tabView>
+      </app-card>
+      <app-card class="w-full" [header]="t('tips')" data-testid="card-advices">
+        <app-advices class="border-0 border-transparent" [financialTips]="financialTips"></app-advices>
+      </app-card>
+    </div>
+  </div>
+</div>
+<p-dialog *transloco="let t; read: 'item'" [header]="t('add.new')" [(visible)]="isAddItemVisible" [modal]="true" [style]="{ width: '30vw', minWidth: '20rem', minHeight: '35rem' }" [draggable]="true" [resizable]="false" data-testid="dialog-add-item">
+  <app-add [categories]="(categoriesColored$ | async) || []" (add)="onAdd($event)" [templates]="(templates$ | async) || []" [accounts]="(accounts$ | async) || []"></app-add>
+</p-dialog>
+
+

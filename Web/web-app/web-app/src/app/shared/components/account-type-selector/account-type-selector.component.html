@@ -1,0 +1,10 @@
+<p-dropdown
+  id="accountType"
+  [(ngModel)]="selectedAccountType"
+  [options]="accountTypeOptions"
+  optionLabel="label"
+  optionValue="value"
+  placeholder="Select an account type"
+  [disabled]="disabled"
+  (onChange)="onAccountTypeChange()">
+</p-dropdown>

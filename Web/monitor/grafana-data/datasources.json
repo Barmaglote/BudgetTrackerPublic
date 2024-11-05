@@ -1,0 +1,6 @@
+{
+    "name": "budget-tracker-prometheus",
+    "type": "prometheus",
+    "url": "http://budget-tracker-prometheus:9090",
+    "access": "proxy"
+}

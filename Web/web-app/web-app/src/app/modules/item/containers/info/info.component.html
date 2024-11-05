@@ -1,0 +1,50 @@
+<div class="flex flex-wrap w-full justify-content-center flex align-items-center min-w-min" *transloco="let t; read: 'item'">
+  <app-card class="w-full w-12 md:w-6 m-6">
+    <div class="w-full flex flex-wrap justify-content-between p-4">
+      <div class="col-8 flex flex-wrap justify-content-center align-items-start text-left font-bold text-4xl">
+        <div class="w-full text-left" *ngIf="(item$ | async)">{{(item$ | async)?.category}}</div>
+        <div class="w-full text-left" *ngIf="!(item$ | async)"><p-skeleton width="10rem" height="4rem"></p-skeleton></div>
+        <div class="w-full text-left font-semibold text-2xl cursor-pointer" *ngIf="(area$ | async)">{{(area$ | async)}}</div>
+      </div>
+      <div class="col-4 flex flex-column">
+        <div class="w-full flex flex-row justify-content-between">
+          <div class="flex">{{t('info.id')}}</div>
+          <div class="flex" *ngIf="(item$ | async)">{{(item$ | async)?.idString}}</div>
+          <div class="flex" *ngIf="!(item$ | async)"><p-skeleton width="12rem" height="1rem"></p-skeleton></div>
+        </div>
+        <div class="w-full flex flex-row justify-content-between">
+          <div class="flex">{{t('info.date')}}</div>
+          <div class="flex" *ngIf="(item$ | async)">{{(item$ | async)?.date | date}}</div>
+          <div class="flex align-items-center" *ngIf="!(item$ | async)"><p-skeleton width="12rem" height="1rem"></p-skeleton></div>
+        </div>
+      </div>
+    </div>
+    <p-divider class="w-full"></p-divider>
+    <div class="w-full flex flex-column gap-2 p-4 text-xl">
+      <div class="w-full flex flex-row justify-content-between gap-2">
+        <div class="flex font-semibold">{{t('info.account')}}:</div>
+        <div class="flex cursor-pointer hover:underline" [routerLink]="'/user/accounts/'+account?.id" *ngIf="(account$ | async) as account">{{account?.title}}</div>
+        <div class="flex align-items-center" *ngIf="!(account$ | async)"><p-skeleton width="20rem" height="2rem"></p-skeleton></div>
+      </div>
+      <div class="w-full flex flex-row justify-content-between gap-2">
+        <div class="flex font-semibold">{{t('info.isRegular')}}:</div>
+        <div class="flex" *ngIf="(item$ | async)">{{(item$ | async)?.isRegular}}</div>
+        <div class="flex align-items-center" *ngIf="!(item$ | async)"><p-skeleton width="20rem" height="2rem"></p-skeleton></div>
+      </div>
+      <div class="w-full flex flex-row justify-content-between gap-2">
+        <div class="flex font-semibold">{{t('info.quantity')}}:</div>
+        <div class="flex" *ngIf="(item$ | async)">${{(item$ | async)?.quantity}}</div>
+        <div class="flex align-items-center" *ngIf="!(item$ | async)"><p-skeleton width="20rem" height="2rem"></p-skeleton></div>
+      </div>
+      <div class="w-full flex flex-row justify-content-between gap-2">
+        <div class="flex font-semibold">{{t('info.comment')}}:</div>
+        <div class="flex text-right" *ngIf="(item$ | async)">{{(item$ | async)?.comment}}</div>
+        <div class="flex align-items-center" *ngIf="!(item$ | async)"><p-skeleton width="20rem" height="2rem"></p-skeleton></div>
+      </div>
+    </div>
+    <p-divider class="w-full"></p-divider>
+    <div class="w-full flex flex-wrap justify-content-end px-4 py-2">
+      <p-button label="Back" (click)="navigateBack()"></p-button>
+    </div>
+  </app-card>
+</div>

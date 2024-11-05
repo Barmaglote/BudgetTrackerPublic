@@ -1,0 +1,19 @@
+<div class="flex flex-column w-full">
+  <p-dropdown
+    id="accountType"
+    [(ngModel)]="selectedLanguage"
+    [options]="languageOptions"
+    optionLabel="label"
+    optionValue="value"
+    placeholder="Select language"
+    data-testid="language-selector"
+    (onChange)="onLanguageChange()">
+  </p-dropdown>
+</div>
+<div class="flex flex-column w-full" *ngIf="isError()">
+  <p-messages severity="error">
+    <ng-template pTemplate>
+      {{'settings.incorrectValue' | transloco}}
+    </ng-template>
+  </p-messages>
+</div>

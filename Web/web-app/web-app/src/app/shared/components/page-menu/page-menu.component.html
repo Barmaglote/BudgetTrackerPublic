@@ -1,0 +1,10 @@
+<div class="flex flex-wrap">
+  <p *ngIf="info">
+    {{info}}
+  </p>
+  <div class="flex flex-column gap-1 w-full">
+    <div class="card flex justify-content-center">
+      <p-panelMenu [model]="items" [style]="{'width':'100%'}" [multiple]="true" class="w-full flex" data-testid="menu-button"></p-panelMenu>
+    </div>
+  </div>
+</div>

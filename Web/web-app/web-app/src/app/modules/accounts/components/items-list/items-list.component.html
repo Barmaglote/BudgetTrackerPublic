@@ -1,0 +1,42 @@
+<p-tabView class="w-full flex" *transloco="let t">
+  <p-tabPanel [header]="t('accounts.income')" class="w-full flex">
+    <p-dataView #income [value]="((income$ | async) || [])" class="w-full flex" [rows]="50" [paginator]="false">
+      <ng-template pTemplate="listItem" let-item class="w-full flex w-12">
+        <div class="w-12 w-full flex p-1" *ngIf="item">
+          <div class="w-2">
+            {{item?.date | date:'dd.MM.yyyy' }}
+          </div>
+          <div class="w-2">
+            {{item?.category }}
+          </div>
+          <div class="w-6">
+            {{item?.comment }}
+          </div>
+          <div class="w-2 text-right">
+            {{item?.quantity | currency:currency:'symbol-narrow' }}
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </p-tabPanel>
+  <p-tabPanel [header]="t('accounts.expenses')" class="w-full flex">
+    <p-dataView #expenses [value]="((expenses$ | async) || [])" class="w-full flex" [rows]="50" [paginator]="false">
+      <ng-template pTemplate="listItem" let-item class="w-full flex">
+        <div class="w-12 flex p-1" *ngIf="item">
+          <div class="w-2">
+            {{item?.date | date:'dd.MM.yyyy' }}
+          </div>
+          <div class="w-2">
+            {{item?.category }}
+          </div>
+          <div class="w-6">
+            {{item?.comment }}
+          </div>
+          <div class="w-2 text-right">
+            {{item?.quantity | currency:currency:'symbol-narrow' }}
+          </div>
+        </div>
+      </ng-template>
+    </p-dataView>
+  </p-tabPanel>
+</p-tabView>

@@ -1,0 +1,23 @@
+<div class="w-full flex flex-wrap">
+  <div class="flex flex-column w-full">
+    <div class="p-inputgroup">
+      <input type="text" pInputText placeholder="Keyword" [(ngModel)]="category" data-testid="category-input"/>
+      <button type="button" pButton icon="pi pi-check" styleClass="p-button-warn" label="add" data-testid="category-input-add" (click)="addItem()" [disabled]="isError() || disabled || (items && items.length > MAX_LIST_LENGHT)"></button>
+    </div>
+    <div class="flex flex-column w-full" *ngIf="isError()">
+      <p-messages severity="error">
+        <ng-template pTemplate>
+          {{'settings.categories.incorrectValue' | transloco}}
+        </ng-template>
+      </p-messages>
+    </div>
+    <div class="flex flex-wrap" *ngIf="items">
+      <div class="py-3 gap-2 flex flex-wrap">
+        <p-chip *ngFor="let item of items" [removable]="true" (onRemove)="removeCategory(item)" styleClass="bg-orange-500 text-white" data-testid="chip-income">
+          <div class="p-2 cursor-pointer" (click)="onSelect(item)">{{item}} <br/>
+          </div>
+        </p-chip>
+      </div>
+    </div>
+  </div>
+</div>

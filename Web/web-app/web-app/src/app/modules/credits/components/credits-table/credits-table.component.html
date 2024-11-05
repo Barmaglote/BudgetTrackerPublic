@@ -1,0 +1,82 @@
+<p-table
+  *ngIf = "items"
+  #table
+  [value]="items || []"
+  [tableStyle]="{ 'min-width': '50rem'}"
+  [lazy]="true"
+  [paginator]="true"
+  [rowsPerPageOptions]="[10, 50, 100]"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  (onLazyLoad)="onLoadData($event)"
+  [totalRecords]="totalRecords"
+  [rows]="10"
+  selectionMode="single"
+  styleClass="p-datatable p-datatable-sm"
+  rowGroupMode="subheader"
+  [groupRowsBy]="isGrouped ? 'month' : null"
+  sortMode="single"
+  dataKey="idString"
+>
+  <ng-template pTemplate="caption">
+  <div class="flex w-full flex justify-content-between flex-wrap">
+    <div class="flex flex-wrap align-items-center px-2 text-2xl">
+      {{ title }}
+    </div>
+  </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th style="width: 5rem"></th>
+      <th class="text-center">{{'credits.add.date' | transloco}}</th>
+      <th class="text-center">{{'credits.add.status' | transloco}}</th>
+      <th class="text-center">{{'credits.add.category' | transloco}}</th>
+      <th class="text-center">{{'credits.add.account' | transloco}}</th>
+      <th class="text-center">{{'credits.add.quantity' | transloco}}</th>
+      <th class="text-center">{{'credits.add.rate' | transloco}}</th>
+      <th class="text-center">{{'credits.add.period' | transloco}}</th>
+      <th class="text-center">{{'credits.add.comment' | transloco}}</th>
+      <th class="text-center"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item let-expanded="expanded">
+    <tr>
+      <td>
+        <button type="button" pButton pRipple [pRowToggler]="item" class="p-button-text p-button-rounded p-button-plain" [icon]="expanded ? 'pi pi-chevron-down' : 'pi pi-chevron-right'"></button>
+      </td>
+      <td class="w-1 text-center">
+          {{ item.date | date: 'shortDate' }}
+      </td>
+      <td class="w-1 text-center">
+        <span class="material-icons text-green-400" *ngIf="item.isActive">play_circle</span>
+      </td>
+      <td class="w-1 text-left">{{ item.category }}</td>
+      <td class="w-2 text-right cursor-pointer hover:underline" [routerLink]="'/user/accounts/'+item.accountId">{{ getAccount(item.accountId)?.title }}</td>
+      <td class="w-1 text-right">{{ item.quantity | currency: getAccount(item.accountId)?.currency:'symbol-narrow' }}</td>
+      <td class="w-1 text-right">{{ item.rate }}%</td>
+      <td class="w-1 text-right">{{ item.months }}</td>
+      <td class="w-3 text-left">{{ item.comment }}</td>
+      <td class="text-center w-1">
+        <p-menu #creditsMenu [model]="menuItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(item)"></p-menu>
+        <button pButton type="button" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="creditsMenu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-item>
+    <tr>
+      <td colspan="10" dataKey="idString">
+        <div class="p-3">
+          <app-payment-plan
+            (transfer)="onTransfer($event, item.idString)"
+            [accounts]="accounts"
+            [accountId]="item.accountId"
+            [loan]="item.quantity"
+            [isReadOnly]="item.isActive"
+            (changed)="onPlanChanged($event, item)"
+            [paymentPlan]="item.plan"
+            [currency]="getAccount(item.accountId)?.currency"></app-payment-plan>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog [style]="{ width: '600px' }" [appendTo]="'body'"></p-confirmDialog>

@@ -1,0 +1,7 @@
+body .p-datepicker table td {
+    padding: 0.13rem;
+}
+
+::ng-deep .p-datepicker table td {
+            padding: 0.13rem;
+}

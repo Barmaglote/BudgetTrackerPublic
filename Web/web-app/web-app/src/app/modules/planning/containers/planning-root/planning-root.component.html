@@ -1,0 +1,46 @@
+<div class="flex flex-wrap w-full justify-content-between flex align-content-between px-3" *transloco="let t; read: 'planning'">
+    <div class="w-9 p-2 gap-3 flex flex-wrap" *ngIf="{plannedItems : (plannedItems$ | async)} as obs">
+      <app-card [header]="t('calendar')" class="w-12">
+        <div class="flex">
+          <p-calendar class="max-w-full" [panelStyleClass]="'border-0'" [(ngModel)]="date" [inline]="true" [showWeek]="true" (onMonthChange)="onMonthChange($event)"></p-calendar>
+          <div class="flex h-25rem border-0 w-full overflow-y-auto p-2">
+            <app-plans [plans]="obs.plannedItems || []" class="w-full flex"
+            *ngIf="obs.plannedItems && obs.plannedItems.length > 0"
+            (edit)="onEdit($event)"
+            (addItem)="onAddItem($event)"
+            (delete)="onDelete($event)">
+            </app-plans>
+            <div class="w-full flex flex-column h-full" *ngIf="!obs.plannedItems || obs.plannedItems.length === 0">
+              <div class="w-full flex h-full">No planned items</div>
+              <div class="w-full text-right">
+                <button pButton type="button" (click)="addPlannedItem()" [label]="'Add item'" class="p-button surface-0 border-0 text-800 bg-primary" icon="pi pi-plus"></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </app-card>
+      <div class="w-full flex flex-row gap-3">
+        <app-card [header]="t('regualar')" class="w-6">
+          <app-regualar-payments (payment)="onPayment($event)" [templatesIncome]="(templatesIncome$ | async) || []" [templatesExpenses]="(templatesExpenses$ | async) || []" [accounts]="(accounts$ | async) || []"></app-regualar-payments>
+        </app-card>
+        <app-card class="w-6" [header]="t('next_payments')" *ngIf="(payments$ | async)">
+          <app-next-payments [accounts]="(accounts$ | async) || []" [payments]="(payments$ | async) || []" (transfer)="onTransfer($event)"></app-next-payments>
+        </app-card>
+      </div>
+    </div>
+    <div class="w-3 p-2 gap-3 flex flex-column">
+      <app-card class="w-full" [header]="t('planning')">
+        <app-page-menu [items]="pageMenuItems" [info]="'Управление Доходами: Отслеживайте, Регистрируйте и Анализируйте Ваши Поступления для Эффективного Управления Финансами.'"></app-page-menu>
+      </app-card>
+      <app-card class="w-full" [header]="t('tips')">
+        <app-advices class="border-0 border-transparent" [financialTips]="financialTips"></app-advices>
+      </app-card>
+    </div>
+</div>
+<p-confirmDialog [style]="{ width: '450px' }" [appendTo]="'body'" key="accounts"></p-confirmDialog>
+<p-dialog [header]="'item.add.new' | transloco" [(visible)]="isAddItemVisible" [modal]="true" [style]="{ width: '30vw', minWidth: '20rem', minHeight: '35rem' }" [draggable]="true" [resizable]="false">
+  <app-add [categories]="(categoriesColored$ | async) || []" (add)="onAdd($event)" [templates]="(templates$ | async) || []" [accounts]="(accounts$ | async) || []"></app-add>
+</p-dialog>
+<p-dialog [header]="'item.add.new' | transloco" [(visible)]="isPayItemVisible" [modal]="true" [style]="{ width: '30vw', minWidth: '20rem', minHeight: '35rem' }" [draggable]="true" [resizable]="false">
+  <app-add [categories]="(categoriesColored$ | async) || []" [plannedItem]="(plannedItem$ | async) || undefined" (add)="onAddFromPlanned($event)" [templates]="(area$ | async) == 'income' ? ((templatesIncome$ | async) || []) : ((templatesExpenses$ | async) || [])" [accounts]="(accounts$ | async) || []"></app-add>
+</p-dialog>

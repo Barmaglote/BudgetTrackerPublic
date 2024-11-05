@@ -1,0 +1,10 @@
+<div class="flex align-items-center justify-content-center">
+  <div class="w-full lg:w-6 p-4 lg:p-7">
+    <app-card [header]="'login.restore' | transloco">
+      {{'login.link_to_confirm_new_password_is_sent_to_your_e-mail' | transloco}}
+      <div class="w-full flex justify-content-center">
+        <a [href]="loginLink" class="p-1">{{'login.sign_in' | transloco}}</a>
+      </div>
+    </app-card>
+  </div>
+</div>

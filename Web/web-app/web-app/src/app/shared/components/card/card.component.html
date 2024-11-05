@@ -1,0 +1,9 @@
+<div class="p-3 shadow-1 border-round-lg card blurred-background">
+  <div class="w-full flex justify-content-between">
+    <div class="w-full"><h2 *ngIf="header" class="p-0 m-0 mb-2">{{header}}</h2></div>
+    <div>
+      <ng-template *ngIf="headerTemplate" [ngTemplateOutlet]="headerTemplate" ></ng-template>
+    </div>
+  </div>
+  <ng-content></ng-content>
+</div>

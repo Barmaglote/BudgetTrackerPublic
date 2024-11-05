@@ -1,0 +1,31 @@
+<form [formGroup]="newItemForm" (ngSubmit)="onSubmit()" class="w-full" *transloco="let t;">
+  <div class="formgrid grid">
+    <div class="field col-12 flex flex-column">
+      <label htmlFor="date">{{ t("item.add.date") }}</label>
+      <p-calendar formControlName="date" class="max-w-full"
+        [class.ng-dirty]="newItemForm.get('date')?.hasError('required') && newItemForm.get('date')?.touched"
+        [class.ng-invalid]="newItemForm.get('date')?.hasError('required') && newItemForm.get('date')?.touched"
+        [appendTo]="'body'"
+      ></p-calendar>
+    </div>
+    <div class="field col-12 flex flex-column">
+      <label for="currency">{{'settings.accounts.currency' | transloco}}</label>
+      <app-currency-selector [currency]="currency || ''" (currencyChange)="onCurrencyChange($event)"  id="currency" required [class.ng-invalid]="!currency"></app-currency-selector>
+    </div>
+    <div class="field col-12 flex flex-column">
+      <label htmlFor="quantity">{{ t("item.add.quantity") }}</label>
+      <p-inputNumber formControlName="quantity" pInputNumber></p-inputNumber>
+    </div>
+    <div class="field col-12 flex flex-column">
+      <label htmlFor="area">{{ t("item.add.area") }}</label>
+      <p-dropdown [options]="['income','expenses']" formControlName="area" pInputNumber></p-dropdown>
+    </div>
+    <div class="field col-12 flex flex-column">
+      <label htmlFor="comments">{{ t("item.add.comment") }}</label>
+      <textarea rows="4" formControlName="comment" cols="30" pInputTextarea [autoResize]="true" class="h-8rem"></textarea>
+    </div>
+  </div>
+  <div class="flex flex-column gap-2 mt-3">
+    <p-button label="Submit" type="submit" [disabled]="newItemForm.invalid"></p-button>
+  </div>
+</form>

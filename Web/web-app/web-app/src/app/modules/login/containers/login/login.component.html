@@ -1,0 +1,44 @@
+<div class="h-screen">
+  <div class="px-4 md:px-6 lg:px-8 h-full flex align-items-center">
+    <div class="flex flex-wrap shadow-2">
+      <div class="w-full lg:w-6 px-0 py-4 lg:p-7 bg-blue-50">
+        <div class="w-full flex flex-row gap-1 align-items-center">
+          <div class="i-logo h-4rem w-15rem m-2"></div>
+          <div class="">{{environment.version}}</div>
+        </div>
+        <p-carousel [value]="products" [numVisible]="1" [numScroll]="1" [circular]="false" [responsiveOptions]="responsiveOptions" [showNavigators]="false">
+          <ng-template let-product pTemplate="item">
+              <div class="surface-border border-round m-2 text-center py-5 px-3">
+                <div class="text-center mb-8 ng-star-inserted justify-content-center align-items-center flex flex-column">
+                  <div class="{{product.image}} h-10rem w-10rem"></div>
+                  <div class="mx-auto font-medium text-xl mb-4 text-blue-900">{{product.name}}</div>
+                  <p class="m-0 text-blue-700 line-height-3">{{product.description}}</p>
+                </div>
+              </div>
+          </ng-template>
+        </p-carousel>
+      </div>
+      <div class="w-full lg:w-6 p-4 lg:p-7 surface-card">
+        <div class="flex align-items-center justify-content-between mb-7">
+          <span class="text-2xl font-medium text-900">{{'login.login_to_badget_tracker' | transloco}}</span>
+          <p-button tabindex="0" [routerLink]="signUpUrl" [link]="true" class="font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150"><span class="font-medium">{{'login.sign_up' | transloco}}</span></p-button>
+        </div>
+        <div class="flex flex-wrap align-items-center gap-2 w-full justify-content-center ">
+          <asl-google-signin-button type='standard' size='large' width="350" text='signin_with'></asl-google-signin-button>
+          <button pripple="" (click)="signInWithFB()" style="width:350px; padding: 2px 0px; height: 40px;"
+            class="p-ripple p-element font-medium border-1 surface-border surface-0 py-3 p-component hover:surface-200 active:surface-300 text-900 cursor-pointer transition-colors transition-duration-150 inline-flex align-items-center justify-content-center">
+            <div class="i-icons-brands-facebook w-1rem h-1rem mx-2"></div>
+            <span>{{'login.sign_in_with_facebook' | transloco}}</span>
+            <span class="p-ink"></span>
+          </button>
+        </div>
+        <p-divider [align]="'center'" class="p-element my-4 justify-content-center">
+          <div role="separator" class="my-4 p-divider p-component p-divider-horizontal p-divider-solid p-divider-center">
+            <div class="p-divider-content"><span class="text-600 font-normal text-sm">{{'login.or' | transloco}}</span></div>
+          </div>
+        </p-divider>
+        <app-login-form (submit)="onSubmit($event)" [email]="email" [password]="password"></app-login-form>
+      </div>
+    </div>
+  </div>
+</div>

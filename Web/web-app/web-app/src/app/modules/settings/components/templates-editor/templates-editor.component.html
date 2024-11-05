@@ -1,0 +1,58 @@
+<div class="w-full flex flex-wrap">
+  <div class="flex flex-column w-full" *ngIf="item">
+    <div class="field flex flex-column">
+      <label for="title">{{'settings.templates.title' | transloco}}</label>
+      <input type="text" data-testid="title-input" id="title" pInputText [(ngModel)]="item.title" autocomplete="off" (ngModelChange)="onTitleChange()"/>
+    </div>
+    <div class="field flex flex-column">
+      <label for="account">{{'item.add.account' | transloco}}</label>
+      <p-dropdown
+        inputId="account"
+        *ngIf="accounts"
+        [options]="accounts"
+        [(ngModel)]="account"
+        optionLabel="title"
+        [showClear]="true"
+        [required]="true"
+        [appendTo]="'body'"
+        [styleClass]="'w-full'"
+        (ngModelChange)="onAccountChange()"
+        data-testid="account-selector"
+        placeholder="Select account">
+      </p-dropdown>
+    </div>
+    <div class="field flex flex-column">
+      <label for="category">{{'settings.templates.category' | transloco}}</label>
+      <p-dropdown
+      inputId="category"
+      *ngIf="categories"
+      [options]="categories"
+      [showClear]="true"
+      [required]="true"
+      [styleClass]="'w-full'"
+      [(ngModel)]="item.category"
+      data-testid="category-selector"
+      placeholder="Select a Category">
+        <ng-template pTemplate="selectedItem">
+          <div class="p-0 m-0 text-left">{{item.category}}</div>
+        </ng-template>
+        <ng-template let-option pTemplate="item">
+          <div class="p-0 m-0 text-left">{{option}}</div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="field flex flex-column" *ngIf="account?.currency">
+      <label for="quantity">{{'settings.templates.quantity' | transloco}}</label>
+      <p-inputNumber id="quantity" data-testid="templates-input-quantity" [(ngModel)]="item.quantity" mode="currency" [currency]="account?.currency" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'"></p-inputNumber>
+    </div>
+    <div class="field flex flex-column">
+      <label for="quantity">{{'settings.templates.regular' | transloco}}</label>
+      <p-checkbox [(ngModel)]="item.isRegular" [binary]="true" inputId="binary" data-testid="templates-input-regular"></p-checkbox>
+    </div>
+    <div class="field flex flex-column">
+      <label for="description">{{'settings.templates.comment' | transloco}}</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="item.comment" required rows="3" cols="20" [autoResize]="true" data-testid="templates-input-description"></textarea>
+    </div>
+
+  </div>
+</div>

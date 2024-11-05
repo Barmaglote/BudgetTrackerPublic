@@ -1,0 +1,33 @@
+<div class="w-full flex flex-wrap">
+  <div class="flex flex-column w-full" *ngIf="item">
+    <div class="field flex flex-column">
+      <label for="title">{{'settings.accounts.title' | transloco}}</label>
+      <input data-testid="accounts-input-title" type="text" id="title" pInputText [(ngModel)]="item.title" required autocomplete="off" [class.ng-invalid]="!item.title" (ngModelChange)="onTitleChange()"/>
+    </div>
+    <div class="field flex flex-column">
+      <label for="currency-selector">{{'settings.accounts.currency' | transloco}}</label>
+      <app-currency-selector id="currency-selector" data-testid="currency-selector" [(ngModel)]="item.currency" required (currencyChange)="onCurrencyChange($event)" [class.ng-invalid]="!item.currency"></app-currency-selector>
+    </div>
+    <div class="field flex flex-column">
+      <label for="account-types-selector">{{'settings.accounts.accountType' | transloco}}</label>
+      <app-account-type-selector id="account-types-selector" data-testid="account-types-selector" [(ngModel)]="item.accountType" required (accountTypeChange)="onAccountTypeChange($event)"></app-account-type-selector>
+    </div>
+    <div class="field flex flex-column" *ngIf="item?.currency && (item.accountType == AccountType.cash || item.accountType == AccountType.debitCard || item.accountType == AccountType.deposit)">
+      <label for="initial">{{'settings.accounts.initial' | transloco}}</label>
+      <p-inputNumber id="initial" data-testid="accounts-input-initial" [(ngModel)]="item.initial" mode="currency" [currency]="item.currency" [min]="0" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'" [disabled]="item.id !== null && item.id !== undefined"></p-inputNumber>
+    </div>
+    <div class="field flex flex-column" *ngIf="item.currency && (item.accountType == AccountType.credit || item.accountType == AccountType.creditCard)">
+      <label for="limit">{{'settings.accounts.limit' | transloco}}</label>
+      <p-inputNumber mode="currency" class="w-full" data-testid="currency-limit" [currency]="item.currency" id="limit" [(ngModel)]="item.limit" [min]="0" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'" [disabled]="item.id !== null && item.id !== undefined"></p-inputNumber>
+    </div>
+    <div class="field flex flex-column" *ngIf="item.currency && (item.accountType == AccountType.cash || item.accountType == AccountType.debitCard || item.accountType == AccountType.deposit)">
+      <label for="initial">{{'settings.accounts.goal' | transloco}}</label>
+      <p-inputNumber mode="currency" pInputText [(ngModel)]="item.goal" class="w-full" [currency]="item.currency" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'"/>
+      <p-slider [(ngModel)]="item.goal" [min]="0" [max]="10000000"></p-slider>
+    </div>
+    <div class="field flex flex-column">
+      <label for="description">{{'settings.accounts.comment' | transloco}}</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="item.comment" rows="3" cols="20" data-testid="accounts-input-description" [autoResize]="true"></textarea>
+    </div>
+  </div>
+</div>

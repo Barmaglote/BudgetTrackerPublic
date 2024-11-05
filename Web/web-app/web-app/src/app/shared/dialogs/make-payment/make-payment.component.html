@@ -1,0 +1,62 @@
+<div class="flex justify-content-between align-content-center flex-column p-1 w-full gap-3 h-full" *transloco="let t;">
+  <form [formGroup]="newItemForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="formgrid grid">
+      <div class="field col-12">
+        <label htmlFor="fromAccount">{{ t("transfer.add.fromAccount") }}</label>
+        <p-dropdown
+          inputId="fromAccount"
+          *ngIf="accounts"
+          [options]="accounts"
+          formControlName="fromAccount"
+          optionLabel="title"
+          [showClear]="true"
+          [required]="true"
+          [appendTo]="'body'"
+          [styleClass]="'w-full'"
+          [class.ng-dirty]="newItemForm.get('fromAccount')?.hasError('required') && newItemForm.get('fromAccount')?.touched"
+          [class.ng-invalid]="newItemForm.get('fromAccount')?.hasError('required') && newItemForm.get('fromAccount')?.touched"
+          placeholder="Select source">
+        </p-dropdown>
+      </div>
+      <div class="field col-12 flex flex-row align-items-center w-full justify-content-center" *ngIf="newItemForm.get('fromAccount')?.getRawValue()?.currency">
+        <div class="w-12 flex flex-row w-full">
+          <div class="w-6 flex flex-column w-full">
+            <label htmlFor="fromQuantity">{{ t("transfer.add.fromQuantity") }}</label>
+            <p-inputNumber formControlName="fromQuantity" mode="currency" inputId="fromQuantity" [useGrouping]="true" [currency]="newItemForm.get('fromAccount')?.getRawValue()?.currency" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'" [style]="{width: '100%'}"
+              [class.ng-dirty]="newItemForm.get('fromQuantity')?.hasError('min') && newItemForm.get('fromQuantity')?.touched"
+              [class.ng-invalid]="newItemForm.get('fromQuantity')?.hasError('min') && newItemForm.get('fromQuantity')?.touched">
+            </p-inputNumber>
+          </div>
+        </div>
+      </div>
+      <div class="field col-12 flex flex-column">
+        <label htmlFor="toAccount">{{ t("transfer.add.toAccount") }}</label>
+        {{to?.title}}
+      </div>
+      <div class="field col-12 flex flex-row align-items-center w-full justify-content-center" *ngIf="newItemForm.get('toAccount')?.getRawValue()?.currency">
+        <div class="w-12 flex flex-row w-full">
+          <div class="field w-6 flex flex-column w-full">
+            <label htmlFor="toQuantity">{{ t("transfer.add.toQuantity") }}</label>
+            {{toQuantity | currency:to?.currency:'symbol-narrow'}}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="flex flex-column">
+      <p-button
+        label="Submit"
+        type="submit"
+        *ngIf="!(newItemForm.get('toAccount')?.getRawValue()?.id === newItemForm.get('fromAccount')?.getRawValue()?.id || newItemForm.get('toAccount')?.hasError('required')  || newItemForm.get('fromAccount')?.hasError('required'))"
+        [disabled]="newItemForm.get('toAccount')?.getRawValue()?.id === newItemForm.get('fromAccount')?.getRawValue()?.id || newItemForm.get('toAccount')?.hasError('required')  || newItemForm.get('fromAccount')?.hasError('required')">
+      </p-button>
+    </div>
+  </form>
+</div>
+
+
+
+
+
+
+
+

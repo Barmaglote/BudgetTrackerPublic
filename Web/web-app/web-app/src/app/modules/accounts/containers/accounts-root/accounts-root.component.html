@@ -1,0 +1,53 @@
+<div class="p-2 flex flex-wrap" *ngIf="{ accounts: ((accounts$ | async) || []) } as settings">
+  <div class="flex flex-wrap lg:w-9 md:w-full sm:w-full align-content-start px-1 mb-2" *ngIf="settings.accounts?.length !== 0">
+    <app-card *ngFor="let item of settings.accounts" class="lg:w-4 md:w-12 sm:w-12 px-1 mb-2">
+      <app-account-card
+        [item]="item"
+        [statisticsIncome$]="staticsticsByDateIncome$"
+        [statisticsExpenses$]="staticsticsByDateExpenses$"
+        (selectInfo)="onSelectInfo($event)"
+        (selectDelete)="onSelectDelete($event)"
+        (selectEdit)="onSelectEdit($event)"
+        [credits$]="creditsItems$"
+        >
+      </app-account-card>
+    </app-card>
+    <app-card class="w-12 px-1">
+      <app-transactions-table
+        [items]="(transfers$ | async) || []"
+        [title]="translate('accounts.transfers')"
+        (info)="onTransactionInfo($event)"
+        (rockback)="onRollback($event)"
+        (loadData)="onLoadData($event)"
+        [totalRecords]="(totalCount$ | async) || 0">
+      </app-transactions-table>
+    </app-card>
+  </div>
+  <div class="flex flex-column lg:w-3 md:w-full sm:w-full px-2 justify-content-start align-items-start gap-2">
+    <app-card [header]="translate('accounts.accounts')" class="w-full">
+      <app-page-menu [info]="translate('accounts.infomessage')" [items]="pageMenuItems"></app-page-menu>
+    </app-card>
+    <app-card [header]="translate('accounts.structure')" class="w-full">
+      <app-account-structure [items]="settings.accounts" *ngIf="settings.accounts.length !== 0"></app-account-structure>
+      <div class="flex" *ngIf="settings.accounts?.length === 0">{{'accounts.noItems' | transloco}}</div>
+    </app-card>
+    <app-card [header]="translate('accounts.tips')" class="w-full">
+      <app-advices class="border-0 border-transparent" [financialTips]="financialTips"></app-advices>
+    </app-card>
+  </div>
+
+  <div class="flex flex-wrap" *ngIf="settings.accounts?.length === 0">
+    <app-card [header]="translate('accounts.info')">
+      <div class="flex flex-column gap-2">
+        <div class="flex">{{translate('accounts.noItems')}}</div>
+        <div class="flex h-2rem"><p-button label="Create" class="p-button" routerLink="/user/settings/accounts"></p-button></div>
+      </div>
+    </app-card>
+  </div>
+</div>
+
+<p-dialog [header]="translate('transfer.add.new')" [(visible)]="isAddItemVisible" [modal]="true" [style]="{ width: '30rem' }" [draggable]="true" [resizable]="false">
+  <app-add-transfer [accounts]="(accounts$ | async) || []" (add)="onAdd($event)" *ngIf="isAddItemVisible"></app-add-transfer>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }" [appendTo]="'body'" key="accounts"></p-confirmDialog>

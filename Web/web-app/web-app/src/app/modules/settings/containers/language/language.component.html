@@ -1,0 +1,17 @@
+<app-card *transloco="let t; read: 'settings'" data-testid="card-language">
+  <div class="w-full flex flex-wrap px-4">
+    <form [formGroup]="languageForm" (ngSubmit)="onSave()" class="w-full">
+      <div class="flex flex-column w-6">
+        <h3 data-testid="settings-title-language">{{t('language')}}</h3>
+        <app-language-selector formControlName="language" [initial]="initialLanguage"></app-language-selector>
+      </div>
+      <div class="flex flex-column w-6">
+        <h3>{{t('locale')}}</h3>
+        <app-locale-selector formControlName="locale" [initial]="initialLocale"></app-locale-selector>
+      </div>
+      <div class="flex justify-content-start w-full py-4">
+        <button pButton label="Save" class="p-button" icon="pi pi-save" type="submit" data-testid="settings-language-save"></button>
+      </div>
+    </form>
+  </div>
+</app-card>

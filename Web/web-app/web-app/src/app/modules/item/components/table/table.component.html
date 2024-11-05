@@ -1,0 +1,129 @@
+<p-table
+  *ngIf = "items"
+  #table
+  [value]="items || []"
+  [tableStyle]="{ 'min-width': '50rem'}"
+  [lazy]="true"
+  [paginator]="true"
+  [rowsPerPageOptions]="[50, 100, 200]"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  (onLazyLoad)="onLoadData($event)"
+  [totalRecords]="totalRecords"
+  [rows]="50"
+  selectionMode="single"
+  styleClass="p-datatable p-datatable-sm p-datatable-striped"
+  rowGroupMode="subheader"
+  [groupRowsBy]="isGrouped ? 'month' : null"
+  sortMode="single"
+>
+  <ng-template pTemplate="caption">
+  <div class="flex w-full flex justify-content-between flex-wrap">
+    <div class="flex flex-wrap align-items-center px-2 text-2xl">
+      {{ title }}
+    </div>
+    <div class="flex gap-2">
+      <button type="button" pButton pRipple icon="pi pi-file-excel" (click)="exportExcel()" class="p-button-outlined" pTooltip="XLS" tooltipPosition="bottom"></button>
+      <p-toggleButton [(ngModel)]="isGrouped" [onIcon]="onIconClass" [offIcon]="offIconClass"></p-toggleButton>
+    </div>
+  </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th class="text-center">{{'item.table.date' | transloco}}</th>
+      <th class="text-center">{{'item.table.category' | transloco}}</th>
+      <th class="text-center">{{'item.table.quantity' | transloco}}</th>
+      <th class="text-center">%</th>
+      <th class="text-center">{{'item.table.account' | transloco}}</th>
+      <th class="text-center">{{'item.table.comment' | transloco}}</th>
+      <th class="text-center">{{'item.table.isregular' | transloco}}</th>
+      <th class="text-center"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="groupheader" let-item>
+    <tr pRowGroupHeader>
+      <td colspan="8" *ngIf="isGrouped">
+        <span class="font-bold ml-2">{{item.month}}</span>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="groupfooter" let-item>
+    <tr *ngIf="isGrouped">
+        <td colspan="8" class="text-right pr-6">Total: <span class="font-bold">{{ calculateSubTotal(item.month) }}</span></td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td class="w-1 text-center">{{ item.date | date: 'shortDate' }}</td>
+      <td class="">
+        <div [style]="{backgroundColor: getCategory(item.category)?.color}" class="border-round-2xl p-1 text-center text-100">{{item?.category}}</div>
+      </td>
+      <td class="w-1 text-right">{{ item.quantity | currency: getAccount(item.accountId)?.currency:'symbol-narrow' }}</td>
+      <td class="w-1 text-center" *ngIf="{total: aggregateData(getAccount(item.accountId)?.currency) || 0} as progress">
+        <p-progressBar *ngIf="progress.total !== 0" [value]="Math.round((item.quantity / progress.total) * 100)" [showValue]="false" [styleClass]="'h-1rem'"></p-progressBar>
+      </td>
+      <td class="w-2rem text-left white-space-nowrap overflow-hidden text-overflow-ellipsis cursor-pointer hover:underline" [routerLink]="'/user/accounts/'+item.accountId">{{ getAccount(item.accountId)?.title }}</td>
+      <td>{{ item.comment }}</td>
+      <td class="text-center">
+        <div class="justify-content-center align-content-center text-center flex w-full h-full">
+          <div class="i-icons-shared-event-repeat w-2rem h-2rem" *ngIf="item.isRegular"></div>
+        </div>
+      </td>
+      <td class="text-center flex flex-wrap justify-content-center align-items-center">
+        <div class="flex justify-content-center align-items-center flex-wrap" *ngIf="!item?.transactionId">
+          <p-menu #menu [model]="menuItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(item)"></p-menu>
+          <button pButton type="button" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+        </div>
+        <div class="text-center flex flex-wrap justify-content-center align-items-center" *ngIf="item?.transactionId">
+          <p-menu #menu [model]="menuTransactionItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(item)"></p-menu>
+          <button pButton type="button" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="menu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+        </div>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="itemDialog" [style]="{ width: '450px' }" header="Details" [modal]="true" styleClass="p-fluid" appendTo="body">
+  <ng-template pTemplate="content">
+    <div class="field">
+      <label for="category">{{'item.table.category' | transloco}}</label>
+      <p-dropdown
+      inputId="category"
+      *ngIf="categories"
+      [options]="categories"
+      optionLabel="category"
+      [showClear]="true"
+      [required]="true"
+      [styleClass]="'w-full'"
+      [(ngModel)]="category"
+      placeholder="Select a Category">
+        <ng-template pTemplate="selectedItem">
+          <div [style]="{backgroundColor: getCategory(category?.category)?.color}" class="p-0 m-0 text-center text-100">{{category?.category}}</div>
+        </ng-template>
+        <ng-template let-option pTemplate="item">
+          <div [style]="{backgroundColor: getCategory(option.category)?.color}" class="p-0 m-0 text-center text-100">{{option?.category}}</div>
+        </ng-template>
+      </p-dropdown>
+    </div>
+    <div class="formgrid grid">
+      <div class="field col">
+        <label for="quantity">{{'item.table.quantity' | transloco}}</label>
+        <p-inputNumber id="quantity" [(ngModel)]="item.quantity" mode="currency" currency="USD" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'"></p-inputNumber>
+      </div>
+    </div>
+    <div class="field flex flex-column">
+      <label for="quantity">{{'settings.templates.regular' | transloco}}</label>
+      <p-checkbox [(ngModel)]="item.isRegular" [binary]="true" inputId="binary"></p-checkbox>
+    </div>
+    <div class="field">
+      <label for="description">{{'settings.templates.comment' | transloco}}</label>
+      <textarea id="description" pInputTextarea [(ngModel)]="item.comment" required rows="3" cols="20" [autoResize]="true"></textarea>
+    </div>
+  </ng-template>
+
+  <ng-template pTemplate="footer">
+      <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+      <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveItem()"></button>
+  </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{ width: '450px' }" [appendTo]="'body'"></p-confirmDialog>

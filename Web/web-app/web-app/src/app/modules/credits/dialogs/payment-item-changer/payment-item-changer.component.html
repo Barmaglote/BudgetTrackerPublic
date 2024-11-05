@@ -1,0 +1,10 @@
+<div class="flex align-content-between flex-wrap gap-3">
+  <div class="w-full flex justify-content-center align-items-center">
+    <div class="w-2 flex justify-content-center align-items-center p-1">{{payment.month}}.</div>
+    <div class="w-5 flex justify-content-center align-items-center p-1"><p-calendar [(ngModel)]="payment.date" [appendTo]="'body'"></p-calendar></div>
+    <div class="w-5 flex justify-content-center align-items-center p-1"><p-inputNumber [(ngModel)]="payment.quantity"></p-inputNumber></div>
+  </div>
+  <div class="w-full flex justify-content-end align-items-center">
+    <p-button label="Save" (onClick)="updatePaymentItem(payment)"></p-button>
+  </div>
+</div>

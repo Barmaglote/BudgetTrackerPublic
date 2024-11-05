@@ -1,0 +1,87 @@
+<div class="flex justify-content-between align-content-center flex-column p-1 w-full gap-2 h-full" *transloco="let t;">
+  <div class="flex flex-column">
+    <label htmlFor="category" class="w-full mb-2">{{ t("item.add.template") }}</label>
+    <p-dropdown
+      inputId="category"
+      *ngIf="templates"
+      [options]="templates"
+      [(ngModel)]="template"
+      optionLabel="title"
+      [showClear]="true"
+      [required]="true"
+      [styleClass]="'w-full surface-100'"
+      (onChange)="onChangeTemplate()"
+      data-testid="template-selector"
+      placeholder="Select a Template">
+    </p-dropdown>
+    <div class="w-full text-sm text-right"><a [routerLink]="['/user/settings/templates']" target="_blank">Manage templates</a></div>
+  </div>
+  <div class="flex w-full">
+    <p-divider class="w-full"></p-divider>
+  </div>
+  <form [formGroup]="newItemForm" (ngSubmit)="onSubmit()" class="w-full">
+    <div class="formgrid grid">
+      <div class="field flex-column flex col-12">
+        <label for="account">{{'item.add.account' | transloco}}</label>
+        <p-dropdown
+          inputId="account"
+          *ngIf="accounts"
+          [options]="accounts"
+          formControlName="account"
+          optionLabel="title"
+          [showClear]="true"
+          [required]="true"
+          [appendTo]="'body'"
+          [styleClass]="'w-full'"
+          (onChange)="onAccountChange($event)"
+          placeholder="Select account">
+        </p-dropdown>
+        <div class="w-full text-sm text-right"><a [routerLink]="['/user/settings/accounts']" target="_blank">Manage accounts</a></div>
+      </div>
+      <div class="field col-12">
+        <label htmlFor="category">{{ t("item.add.category") }}</label>
+        <p-dropdown
+          inputId="category"
+          *ngIf="categories"
+          [options]="categories"
+          formControlName="category"
+          optionLabel="category"
+          [showClear]="true"
+          [required]="true"
+          [styleClass]="'w-full'"
+          [class.ng-dirty]="newItemForm.get('category')?.hasError('requiredCategory') && newItemForm.get('category')?.touched"
+          [class.ng-invalid]="newItemForm.get('category')?.hasError('requiredCategory') && newItemForm.get('category')?.touched"
+          placeholder="Select a Category">
+        </p-dropdown>
+        <div class="w-full text-sm text-right"><a [routerLink]="['/user/settings/categories']" target="_blank">Manage categories</a></div>
+      </div>
+      <div class="field col-12 flex flex-column" *ngIf="(selectedAccount$ | async)?.currency">
+        <label htmlFor="quantity">{{ t("item.add.quantity") }}</label>
+        <p-inputNumber formControlName="quantity" mode="currency" inputId="quantity" [useGrouping]="true" [currency]="(selectedAccount$ | async)?.currency" [locale]="locale && locale !== null && locale !== 'null' ? locale : 'en-US'"
+          [class.ng-dirty]="newItemForm.get('quantity')?.hasError('min') && newItemForm.get('quantity')?.touched"
+          [class.ng-invalid]="newItemForm.get('quantity')?.hasError('min') && newItemForm.get('quantity')?.touched"
+          *ngIf="newItemForm.get('account')"
+        ></p-inputNumber>
+      </div>
+      <div class="field col-12 flex flex-column">
+        <label htmlFor="comments">{{ t("item.add.comment") }}</label>
+        <textarea rows="4" formControlName="comment" cols="30" pInputTextarea [autoResize]="true" class="h-8rem"></textarea>
+      </div>
+      <div class="field col-12 flex flex-column">
+        <label htmlFor="date">{{ t("item.add.date") }}</label>
+        <p-calendar formControlName="date" class="max-w-full"
+          data-testid="item-add-date"
+          [class.ng-dirty]="newItemForm.get('date')?.hasError('required') && newItemForm.get('date')?.touched"
+          [class.ng-invalid]="newItemForm.get('date')?.hasError('required') && newItemForm.get('date')?.touched"
+        ></p-calendar>
+      </div>
+      <div class="field col-12 flex flex-column">
+        <label for="quantity">{{'settings.templates.regular' | transloco}}</label>
+        <p-checkbox formControlName="isRegular" [binary]="true" inputId="binary"></p-checkbox>
+      </div>
+    </div>
+    <div class="flex flex-column gap-2 mt-3">
+      <p-button label="Submit" type="submit" [disabled]="newItemForm.invalid"></p-button>
+    </div>
+  </form>
+</div>

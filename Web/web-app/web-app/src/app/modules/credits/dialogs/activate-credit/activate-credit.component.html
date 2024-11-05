@@ -1,0 +1,27 @@
+<div class="flex flex-column w-full gap-3 justify-content-start">
+  <div class="flex align-items-start flex-row gap-3">
+    <div class="col-5 p-0 flex justify-content-center align-items-start flex-column">
+      <label htmlFor="transferMoney">{{ "credits.activate.transferMoney" | transloco }}</label>
+      <p-checkbox inputId="transferMoney" [binary]="true" [(ngModel)]="isTransferMoney"></p-checkbox>
+    </div>
+    <div class="col-7 p-0 flex justify-content-center align-items-start flex-column">
+      <label for="account">{{'credits.activate.account' | transloco}}</label>
+      <p-dropdown
+        [disabled]="!isTransferMoney"
+        inputId="account"
+        *ngIf="accounts"
+        [options]="accounts"
+        optionLabel="title"
+        [showClear]="true"
+        [required]="true"
+        [appendTo]="'body'"
+        [styleClass]="'w-full'"
+        [(ngModel)]="account"
+        placeholder="Select account">
+      </p-dropdown>
+    </div>
+  </div>
+  <div class="w-12 flex justify-content-start align-items-center">
+    <p-button label="Save" (onClick)="activateCreditItem(creditItem)"></p-button>
+  </div>
+</div>

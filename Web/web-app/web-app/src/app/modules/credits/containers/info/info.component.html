@@ -1,0 +1,57 @@
+<div class="flex flex-wrap w-full justify-content-center flex align-items-center min-w-min gap-3 p-3" *ngIf="{credit: (credit$ | async) } as credit">
+  <app-card class="w-full w-12 md:w-6" [header]="t('credit')" *transloco="let t; read: 'credits'">
+    <div class="formgrid grid">
+      <div class="field flex-column flex col-12">
+        <label for="account" class="font-semibold">{{t('add.account')}}</label>
+        {{(selectedAccount$ | async)?.title}}
+      </div>
+      <div class="field col-12">
+        <label htmlFor="category" class="font-semibold w-full">{{ t("add.category") }}</label>
+        {{credit.credit?.category}}
+      </div>
+      <div class="field w-12 flex flex-wrap border-0 p-2 m-0" *ngIf="(selectedAccount$ | async)?.currency">
+        <div class="field w-6 flex flex-column border-0">
+          <label htmlFor="quantity" class="font-semibold">{{ t("add.quantity") }}</label>
+          {{credit.credit?.quantity | currency:(selectedAccount$ | async)?.currency : 'symbol-narrow'}}
+        </div>
+        <div class="field w-3 flex flex-column">
+          <label htmlFor="months" class="font-semibold">{{ t("add.months") }}</label>
+          {{credit.credit?.months}}
+        </div>
+        <div class="field w-3 flex flex-column">
+          <label htmlFor="rate" class="font-semibold">{{ t("add.rate") }}</label>
+           {{credit.credit?.rate}}%
+        </div>
+      </div>
+      <div class="field w-12 flex flex-wrap border-0 p-2 m-0" *ngIf="(selectedAccount$ | async)?.currency">
+        <div class="field w-6 flex flex-column">
+          <label htmlFor="date" class="font-semibold">{{ t("add.date") }}</label>
+          {{credit.credit?.date | date:'dd.MM.yyyy'}}
+        </div>
+        <div class="field w-6 flex flex-column">
+          <label htmlFor="mandatory" class="font-semibold">{{ t("add.active") }}</label>
+          {{credit.credit?.isActive}}
+        </div>
+      </div>
+      <div class="field col-12 flex flex-column">
+        <label htmlFor="comments" class="font-semibold">{{ t("add.comment") }}</label>
+        {{credit.credit?.comment}}
+      </div>
+      <div class="w-full flex flex-wrap justify-content-end px-4 py-2">
+        <p-button label="Back" routerLink=".."></p-button>
+      </div>
+    </div>
+  </app-card>
+  <app-card class="w-full w-12 md:w-6" [header]="t('payments_plan')" *transloco="let t; read: 'credits'">
+    <app-payment-plan
+      (transfer)="onTransfer($event, credit.credit?.idString)"
+      [accounts]="(accounts$ | async) || []"
+      [accountId]="credit.credit?.accountId || ''"
+      [loan]="credit.credit?.quantity || 0"
+      [isReadOnly]="credit.credit?.isActive || true"
+      (changed)="onPlanChanged($event, credit.credit)"
+      [paymentPlan]="credit.credit?.plan"
+      [currency]="getAccount((accounts$ | async) || [], credit.credit?.accountId)?.currency"></app-payment-plan>
+  </app-card>
+</div>
+<p-confirmDialog [style]="{ width: '600px' }" [appendTo]="'body'"></p-confirmDialog>

@@ -1,0 +1,10 @@
+<p-carousel [value]="accounts" [numVisible]="1" [numScroll]="1" [showIndicators]="false" [circular]="false" [responsiveOptions]="responsiveOptions" [showNavigators]="true" *ngIf="{ data: ((statistics$ | async) || [])} as statistics">
+  <ng-template let-account pTemplate="item">
+    <div class="w-full flex h-full align-items-center justify-content-center flex-column">
+      <div class="flex text-center flex-row">{{account?.title}}</div>
+      <div class="flex h-full align-items-center justify-content-center">
+        <app-statistics-by-category *ngIf="statistics.data.length > 0" [Statistics$]="filterByAccountId(statistics.data, account.accountId)" [Categories$]="categories$"></app-statistics-by-category>
+      </div>
+    </div>
+  </ng-template>
+</p-carousel>

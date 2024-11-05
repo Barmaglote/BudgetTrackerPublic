@@ -1,0 +1,10 @@
+<div class="card flex justify-content-center h-20rem align-items-center">
+  <p-chart type="bar" [data]="data" [options]="options" [className]="'w-full'"></p-chart>
+  <p-button icon="pi pi-search" class="absolute right-0 bottom-0 z-1 mr-5 mb-5 p-button-rounded p-button-raised p-button-outlined" (onClick)="isFullViewVisible = true"></p-button>
+</div>
+
+<p-dialog [appendTo]="'body'" [header]="'item.stats.dynamics' | transloco" [(visible)]="isFullViewVisible" [modal]="true" [style]="{ width: '80%', height:'80%' }" [resizable]="false">
+  <div class="flex flex-wrap align-items-center justify-content-center w-full h-full">
+    <p-chart type="bar" [data]="data" [options]="options" [className]="'w-full'"></p-chart>
+  </div>
+</p-dialog>

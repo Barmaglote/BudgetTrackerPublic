@@ -1,0 +1,20 @@
+<div class="flex align-items-center justify-content-center w-full p-3 w-12">
+  <div class="flex align-items-center justify-content-center w-full p-3 w-12 lg:w-4 sm:w-12">
+    <app-card header="{{'payment.success.title' | transloco}}">
+      <div class="card flex">
+        {{'payment.success.thank-you' | transloco}}
+      </div>
+      <div class="flex align-items-center w-full gap-2 my-5 text-2xl font-semibold">
+        <div><i class="pi pi-check-circle" style="font-size: 2em; color: green;"></i></div>
+        <div>{{'payment.success.message' | transloco}}</div>
+      </div>
+      <div>
+        <p>{{'payment.success.payment-recieved' | transloco}}</p>
+        <p>{{'payment.success.contact-us' | transloco}}</p>
+      </div>
+      <div>
+        <a pButton type="button" label="Вернуться на главную" icon="pi pi-home" routerLink="/user"></a>
+      </div>
+    </app-card>
+  </div>
+</div>

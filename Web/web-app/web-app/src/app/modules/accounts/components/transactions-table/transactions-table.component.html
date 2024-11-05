@@ -1,0 +1,54 @@
+<p-table
+  *ngIf = "items"
+  #table
+  [value]="items || []"
+  [lazy]="true"
+  [paginator]="true"
+  [rowsPerPageOptions]="[10, 50, 100]"
+  currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+  (onLazyLoad)="onLoadData($event)"
+  [totalRecords]="totalRecords"
+  [rows]="10"
+  selectionMode="single"
+  styleClass="p-datatable p-datatable-sm p-datatable-striped"
+  rowGroupMode="subheader"
+  [groupRowsBy]="isGrouped ? 'month' : null"
+  sortMode="single"
+  responsiveLayout="stack"
+>
+  <ng-template pTemplate="caption">
+  <div class="flex w-full flex justify-content-between flex-wrap">
+    <div class="flex flex-wrap align-items-center px-2 text-2xl">
+      {{ title }}
+    </div>
+  </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th class="text-center">{{'transfer.add.date' | transloco}}</th>
+      <th class="text-center">{{'transfer.add.fromAccount' | transloco}}</th>
+      <th class="text-center">{{'transfer.add.fromQuantity' | transloco}}</th>
+      <th class="text-center">{{'transfer.add.toAccount' | transloco}}</th>
+      <th class="text-center">{{'transfer.add.toQuantity' | transloco}}</th>
+      <th class="text-center"></th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td class="w-1 text-center">{{ item.date | date: 'shortDate' }}</td>
+      <td class="w-3 text-left">{{ item.fromAccount?.title }}</td>
+      <td class="w-2 text-left">
+        <div *ngIf="item.fromQuantity > 0 && item.fromAccount.currency">{{ item.fromQuantity | currency: item.fromAccount.currency:'symbol-narrow' }}</div>
+      </td>
+      <td class="w-3 text-left">{{ item.toAccount?.title }}</td>
+      <td class="w-2 text-left">
+        <div *ngIf="item.toQuantity > 0 && item.toAccount.currency">{{ item.toQuantity | currency: item.toAccount.currency:'symbol-narrow' }}</div>
+      </td>
+      <td class="text-center w-1">
+        <p-menu #transactionMenu [model]="menuItems" [popup]="true" [appendTo]="'body'" (onShow)="selectItem(item)"></p-menu>
+        <button pButton type="button" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded" (click)="transactionMenu.toggle($event)" icon="pi pi-ellipsis-v"></button>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+<p-confirmDialog [style]="{ width: '450px' }" [appendTo]="'body'"></p-confirmDialog>

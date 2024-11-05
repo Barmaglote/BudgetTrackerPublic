@@ -1,0 +1,59 @@
+<div class="flex flex-wrap w-full justify-content-center flex align-items-center min-w-min gap-3 p-3" *ngIf="{account: (accountItem$ | async) } as account">
+  <app-card class="w-full w-12 md:w-6">
+    <div class="w-full flex flex-wrap justify-content-between p-4 gap-5">
+      <div class="col-12 flex flex-wrap justify-content-center align-items-start text-left">
+        <div class="w-full text-left font-bold text-4xl" *ngIf="account.account">{{account.account.title}}</div>
+        <div class="w-full text-left" *ngIf="!(accountItem$ | async)"><p-skeleton width="10rem" height="4rem"></p-skeleton></div>
+        <div class="w-full flex flex-row justify-content-between">
+          <div class="flex" *ngIf="account.account">{{account.account.comment}}</div>
+          <div class="flex" *ngIf="!account.account"><p-skeleton width="12rem" height="1rem"></p-skeleton></div>
+        </div>
+      </div>
+      <div class="w-full flex flex-column h-3rem px-2">
+        <div class="w-full" *ngIf="account.account && account.account.accountType != AccountType.credit && account.account.accountType != AccountType.creditCard">
+          <p-progressBar [value]="account.account.goal > account.account.quantity ? Math.round(account.account.quantity/account.account.goal * 100) : 100" class="w-full" [showValue]="false" [style]="{height:'4px'}"></p-progressBar>
+          <div class="flex w-full flex-wrap justify-content-between text-600">
+            <div class="flex">{{account.account.goal > account.account.quantity ? Math.round(account.account.quantity/account.account.goal * 100) : 100}}%</div>
+            <div class="flex">{{account.account.goal | currency:account.account.currency:'symbol-narrow'}}</div>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 flex flex-row">
+        <div class="w-6">
+          <span class="font-medium">{{'accounts.current' | transloco}}</span>
+          <div class="text-4xl font-bold text-900">{{account.account?.quantity| currency:account.account?.currency:'symbol-narrow'}}</div>
+          <div
+            [class.text-green-500]="result.diff > 0"
+            [class.text-yellow-500]="result.diff == 0"
+            [class.text-red-500]="result.diff < 0"
+            *ngIf="{diff: ((difference$ | async) || 0)} as result">
+            <span class="font-medium" *ngIf="result.diff > 0">+</span>
+            <span class="font-medium">{{result.diff | currency:account.account?.currency:'symbol-narrow'}}</span>
+            <i class="pi text-xs ml-2" [class.pi-arrow-up]="result.diff > 0" [class.pi-arrow-down]="result.diff < 0" *ngIf="result.diff !== 0"></i>
+          </div>
+        </div>
+        <div class="w-6 text-right flex flex-column">
+          <span class="font-medium">{{'accounts.initial' | transloco}}</span>
+          <span class="text-4xl font-bold text-700">{{account.account?.initial| currency:account.account?.currency:'symbol-narrow'}}</span>
+        </div>
+      </div>
+    </div>
+    <div class="w-full flex flex-wrap justify-content-end px-4 py-2">
+      <p-button label="Back" icon="pi pi-directions-alt" (click)="backClicked()"></p-button>
+    </div>
+  </app-card>
+
+  <app-card class="w-full w-12 md:w-6" *ngIf="{account: (accountItem$ | async) } as account">
+    <div class="flex h-25rem w-full justify-content-center align-items-center">
+      <div class="flex h-auto w-full p-2">
+        <app-statistics-by-date-plot [statisticsIncome$]="statisticsForIncome$" [statisticsExpenses$]="statisticsForExpenses$" class="flex w-full"></app-statistics-by-date-plot>
+      </div>
+    </div>
+  </app-card>
+
+  <app-card class="w-full w-12 md:w-6" *ngIf="{account: (accountItem$ | async) } as account">
+    <div class="flex w-full justify-content-center align-items-center">
+      <app-items-list [income$]="income$" [expenses$]="expenses$" [currency]="account.account?.currency" class="w-full flex"></app-items-list>
+    </div>
+  </app-card>
+</div>

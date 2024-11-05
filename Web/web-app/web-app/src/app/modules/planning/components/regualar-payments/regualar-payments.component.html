@@ -1,0 +1,46 @@
+<p-tabView *transloco="let t; read: 'planning'">
+  <p-tabPanel [header]="t('income')" >
+    <div class="flex flex-column gap-2">
+      <div *ngFor="let paymentInfo of templatesIncome; let i = index">
+        <div class="flex flex-row w-full border-0 border-round-xl p-2 border-300 shadow-1 surface-50 text-sm">
+          <div class="w-10 flex flex-wrap">
+            <div class="col-6 align-items-center flex">
+              {{i+1}}. {{paymentInfo.title}}
+            </div>
+            <div class="col-6 font-semibold align-items-center flex">
+              {{paymentInfo.quantity | currency:getAccount(paymentInfo.accountId)?.currency:'symbol-narrow'}}
+            </div>
+            <div class="col-12 align-items-center flex" *ngIf="paymentInfo.comment">
+              {{paymentInfo.comment}}
+            </div>
+          </div>
+          <div class="w-2 font-semibold flex flex-column justify-content-center align-items-end p-3">
+            <button pButton type="button" (click)="makePayment(paymentInfo, 'income')" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded bg-yellow-100" icon="pi pi-wallet"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+  <p-tabPanel [header]="t('expenses')">
+    <div class="flex flex-column gap-2">
+      <div *ngFor="let paymentInfo of templatesExpenses; let i = index">
+        <div class="flex flex-row w-full border-0 border-round-xl p-2 border-300 shadow-1 surface-50 text-sm">
+          <div class="w-10 flex flex-wrap">
+            <div class="col-6 align-items-center flex">
+              {{i+1}}. {{paymentInfo.title}}
+            </div>
+            <div class="col-6 font-semibold align-items-center flex">
+              {{paymentInfo.quantity | currency:getAccount(paymentInfo.accountId)?.currency:'symbol-narrow'}}
+            </div>
+            <div class="col-12 align-items-center flex" *ngIf="paymentInfo.comment">
+              {{paymentInfo.comment}}
+            </div>
+          </div>
+          <div class="w-2 font-semibold flex flex-column justify-content-center align-items-end p-3">
+            <button pButton type="button" (click)="makePayment(paymentInfo, 'expenses')" class="p-button p-button-round surface-0 border-0 text-800 p-button-rounded bg-yellow-100" icon="pi pi-wallet"></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </p-tabPanel>
+</p-tabView>

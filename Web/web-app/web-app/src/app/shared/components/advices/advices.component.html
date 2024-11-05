@@ -1,0 +1,10 @@
+<p-carousel [value]="financialTips" [numVisible]="1" [numScroll]="1" [showIndicators]="false" [circular]="false" [responsiveOptions]="responsiveOptions" [showNavigators]="true">
+  <ng-template let-tip pTemplate="item">
+      <div class="surface-border border-round m-0 p-0">
+        <h3>{{ tip.Title }}</h3>
+        <ul>
+          <li *ngFor="let subTip of tip.Tips">{{ subTip }}</li>
+        </ul>
+      </div>
+  </ng-template>
+</p-carousel>

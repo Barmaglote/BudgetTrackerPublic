@@ -1,0 +1,25 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <label for="email" class="block text-900 font-medium mb-2">{{'login.email' | transloco}}</label>
+  <input data-testid="username-input" formControlName="email" id="email" type="text" placeholder="Email address" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
+  <label for="password" class="block text-900 font-medium mb-2">{{'login.password' | transloco}}</label>
+  <input data-testid="password-input" formControlName="password" id="password" type="password" placeholder="Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3" [autocomplete]="false">
+  <div class="flex align-items-center justify-content-between mb-1">
+    <div class="flex align-items-center">
+      <p-checkbox id="rememberme" class="p-element mr-2" [binary]="true" formControlName="rememberme">
+      </p-checkbox>
+      <label for="rememberme">{{'login.remember_me' | transloco}}</label>
+    </div>
+    <a [routerLink]="restoreLink" class="no-underline font-medium text-blue-500 hover:text-blue-700 cursor-pointer transition-colors transition-duration-150">{{'login.forgot_password' | transloco}}</a>
+  </div>
+  <div class="w-full py-2" *ngIf="env !== 'test'">
+    <re-captcha (resolved)="resolved($event)" [siteKey]="siteKey" formControlName="recaptcha" data-testid="recaptcha-input"></re-captcha>
+  </div>
+  <button data-testid="signin-button" pbutton="" pripple="" label="Sign In" class="g-recaptcha p-element p-ripple w-full py-3 font-medium p-button p-component" [disabled]="env !== 'test' && !recaptcha">
+    <span class="p-button-label">{{'login.sign_in' | transloco}}</span><span class="p-ink"></span>
+  </button>
+  <div class="text-sm text-600">
+    This site is protected by reCAPTCHA and the Google
+    <a href="https://policies.google.com/privacy">Privacy Policy</a> and
+    <a href="https://policies.google.com/terms">Terms of Service</a> apply.
+  </div>
+</form>

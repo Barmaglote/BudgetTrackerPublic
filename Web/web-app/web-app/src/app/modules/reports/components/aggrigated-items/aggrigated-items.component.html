@@ -1,0 +1,91 @@
+<p-table
+#tableRegularPayments
+[value]="items"
+[tableStyle]="{ 'min-width': '50rem'}"
+[lazy]="true"
+[paginator]="false"
+selectionMode="single"
+styleClass="p-datatable p-datatable-sm w-full border-200 border-left-1 border-right-1"
+rowGroupMode="subheader"
+sortMode="single">
+  <ng-template pTemplate="caption">
+  <div class="flex w-full flex justify-content-between flex-wrap">
+    <div class="flex flex-wrap align-items-center px-2 text-2xl">
+      {{ header }}
+    </div>
+  </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th class="text-center border-right-1 w-12rem">{{'reports.category' | transloco}}</th>
+      <th class="text-center">{{'reports.jan' | transloco}}</th>
+      <th class="text-center">{{'reports.feb' | transloco}}</th>
+      <th class="text-center">{{'reports.mar' | transloco}}</th>
+      <th class="text-center">{{'reports.apr' | transloco}}</th>
+      <th class="text-center">{{'reports.may' | transloco}}</th>
+      <th class="text-center">{{'reports.jun' | transloco}}</th>
+      <th class="text-center">{{'reports.jul' | transloco}}</th>
+      <th class="text-center">{{'reports.aug' | transloco}}</th>
+      <th class="text-center">{{'reports.sep' | transloco}}</th>
+      <th class="text-center">{{'reports.oct' | transloco}}</th>
+      <th class="text-center">{{'reports.nov' | transloco}}</th>
+      <th class="text-center">{{'reports.dec' | transloco}}</th>
+      <th class="text-center border-left-1 w-9rem">{{'reports.total' | transloco}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr>
+      <td class="text-left border-right-1 w-12rem">{{item.category}}</td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.jan < item.plan.jan && item.actual.jan !== 0" [class.bg-green-300]="item.actual.jan >= item.plan.jan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.jan, actual: item.actual?.jan, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.feb < item.plan.feb && item.actual.feb !== 0" [class.bg-green-300]="item.actual.feb >= item.plan.feb">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.feb, actual: item.actual?.feb, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.mar < item.plan.mar && item.actual.mar !== 0" [class.bg-green-300]="item.actual.mar >= item.plan.mar">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.mar, actual: item.actual?.mar, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.apr < item.plan.apr && item.actual.apr !== 0" [class.bg-green-300]="item.actual.apr >= item.plan.apr">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.apr, actual: item.actual?.apr, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.may < item.plan.may && item.actual.may !== 0" [class.bg-green-300]="item.actual.may >= item.plan.may">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.may, actual: item.actual?.may, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.jun < item.plan.jun && item.actual.jun !== 0" [class.bg-green-300]="item.actual.jun >= item.plan.jun">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.jun, actual: item.actual?.jun, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.jul < item.plan.jul && item.actual.jul !== 0" [class.bg-green-300]="item.actual.jul >= item.plan.jul">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.jul, actual: item.actual?.jul, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.aug < item.plan.aug && item.actual.aug !== 0" [class.bg-green-300]="item.actual.aug >= item.plan.aug">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.aug, actual: item.actual?.aug, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.sep < item.plan.sep && item.actual.sep !== 0" [class.bg-green-300]="item.actual.sep >= item.plan.sep">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.sep, actual: item.actual?.sep, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.oct < item.plan.oct && item.actual.oct !== 0" [class.bg-green-300]="item.actual.oct >= item.plan.oct">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.oct, actual: item.actual?.oct, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.nov < item.plan.nov && item.actual.nov !== 0" [class.bg-green-300]="item.actual.nov >= item.plan.nov">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.nov, actual: item.actual?.nov, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center" [class.bg-yellow-300]="item.actual.dec < item.plan.dec && item.actual.dec !== 0" [class.bg-green-300]="item.actual.dec >= item.plan.dec">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: { plan: item.plan?.dec, actual: item.actual?.dec, currency: item.currency } }"></ng-container>
+      </td>
+      <td class="text-center border-left-1 w-9rem">
+        <span *ngIf="item.actual.year">{{item.actual.year | currency: item.currency:'symbol-narrow'}}</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<ng-template #itemInfo let-item>
+  <span *ngIf="!item.actual">{{item.plan | currency:item.currency:'symbol-narrow'}}</span>
+  <span *ngIf="item.actual" [pTooltip]="tooltipContent" tooltipPosition="top" [class.text-white]="item.actual >= item.plan">{{item.actual | currency:item.currency:'symbol-narrow'}}</span>
+  <ng-template #tooltipContent>
+    <div class="flex align-items-center">
+      <i class="pi pi-info-circle" style="font-size: 1rem"></i>
+      <span class="ml-2">Actual: {{item.actual | currency:item.currency:'symbol-narrow'}}</span>
+      <span class="ml-2">Plan: {{item.plan | currency:item.currency:'symbol-narrow'}}</span>
+    </div>
+</ng-template>

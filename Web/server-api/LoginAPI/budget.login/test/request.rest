@@ -1,0 +1,38 @@
+### Get all users / Will close this api in the future, it is only for testing mongodb
+GET http://localhost:4000/api/users
+
+### Get persons
+GET http://localhost:5000/api/persons
+Authorization: Bearer 
+qwedqweqwe.qweqweqwewe.qweqweqwe
+
+### Register user
+POST http://localhost:4000/api/auth/signup
+Content-Type: application/json
+{
+    "login": "aaaa@gmail.com",
+    "password": "654654"
+}
+
+### login as evgeniy.danilchenko@gmail.com
+POST http://localhost:4000/api/auth/signin
+Content-Type: application/json
+
+{
+    "login": "aaaa@gmail.com",
+    "password": "654654"
+}
+
+### Refresh token
+POST http://localhost:4000/api/auth/token
+Content-Type: application/json
+{
+    "refreshToken": "sdsfasfdsfsdfsdf.asdasdasdasd.asdasdasdas"    
+}
+
+### Refresh token
+DELETE http://localhost:4000/api/auth/logout
+Content-Type: application/json
+{
+    "refreshToken": "asdsadasd.asdasdasd.asdasdasdasd"    
+}

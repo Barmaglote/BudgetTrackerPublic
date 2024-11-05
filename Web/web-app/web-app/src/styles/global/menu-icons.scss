@@ -1,0 +1,54 @@
+/*
+  Usage:
+
+  <div class="i-picking-status-1boxes-0scanned xxx-icon"></div>
+
+  // background image automatically scales, only set height/width
+  .xxx-icon {
+    height: 3rem;
+    width: 5rem;
+  }
+*/
+
+.i-icons-menu-reports {
+  background-image: url('../../assets/icons/menu/reports.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.i-icons-menu-income {
+  background-image: url('../../assets/icons/menu/income.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.i-icons-menu-accounts {
+  background-image: url('../../assets/icons/menu/accounts.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.i-icons-menu-expenses {
+  background-image: url('../../assets/icons/menu/expenses.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.i-icons-menu-credits {
+  background-image: url('../../assets/icons/menu/credits.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+
+.i-icons-menu-planning {
+  background-image: url('../../assets/icons/menu/planning.png');
+  background-repeat: no-repeat;
+  background-size: contain;
+  background-position: center;
+}
+

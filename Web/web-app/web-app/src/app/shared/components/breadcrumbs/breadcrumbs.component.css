@@ -1,0 +1,6 @@
+:host ::ng-deep {
+  .p-breadcrumb .p-menuitem-text, .p-menuitem-separator, .p-menuitem-icon{
+    font-weight: 500;
+    color: antiquewhite !important;
+  }
+}

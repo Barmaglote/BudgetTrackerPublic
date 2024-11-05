@@ -1,0 +1,33 @@
+<form class="p-2 gap-2 flex flex-column" [formGroup]="signupForm" (ngSubmit)="onSubmit()">
+  <label for="title" class="block text-900 font-medium mb-2">{{'login.title' | transloco}}</label>
+  <input id="title"
+    formControlName="title"
+    [class.ng-dirty]="signupForm.get('title')?.touched"
+    [class.ng-invalid]="signupForm.get('title')?.invalid && signupForm.get('title')?.touched"
+    type="text" placeholder="Title" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
+
+  <label for="email" class="block text-900 font-medium mb-2">{{'login.email' | transloco}}</label>
+  <input id="email"
+    formControlName="email"
+    [class.ng-dirty]="signupForm.get('email')?.touched"
+    [class.ng-invalid]="signupForm.get('email')?.invalid && signupForm.get('email')?.touched"
+    type="text" placeholder="Email address" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
+
+  <label for="password" class="block text-900 font-medium mb-2">{{'login.password' | transloco}}</label>
+  <input id="password" type="password" placeholder="Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3" [autocomplete]="false"
+    formControlName="password"
+    [class.ng-dirty]="signupForm.get('password')?.touched"
+    [class.ng-invalid]="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+
+  <label for="password2" class="block text-900 font-medium mb-2">{{'login.confirm_password' | transloco}}</label>
+  <input id="password2" type="password" placeholder="Password" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3" [autocomplete]="false"
+    formControlName="password2"
+    [class.ng-dirty]="signupForm.get('password2')?.touched"
+    [class.ng-invalid]="signupForm.get('password2')?.hasError('required') && signupForm.get('password2')?.touched">
+  <div class="w-full py-2">
+    <re-captcha [siteKey]="siteKey" formControlName="recaptcha" data-testid="recaptcha-input"></re-captcha>
+  </div>
+  <button pbutton="" pripple="" label="Sign In" class="p-element p-ripple w-full py-3 font-medium p-button p-component" [disabled]="signupForm.invalid || !signupForm.touched || signupForm.get('password')?.value !== signupForm.get('password2')?.value">
+    <span class="p-button-label">{{'login.sign_in' | transloco}}</span><span class="p-ink"></span>
+  </button>
+</form>

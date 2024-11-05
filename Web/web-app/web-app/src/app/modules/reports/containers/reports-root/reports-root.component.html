@@ -1,0 +1,19 @@
+<div class="w-full p-3" *transloco="let t; read: 'reports'">
+  <app-card [header]="t('reports')" [headerTemplate]="headerTemplate">
+    <div class="w-full flex flex-column gap-2">
+        <div class="card flex justify-content-center w-full flex-column gap-4 py-4">
+          <app-aggrigated-items [items]="(AggrigatedIncomes$ | async) || []" [header]="t('incomes')" #incomes></app-aggrigated-items>
+          <app-aggrigated-items [items]="(AggrigatedExpenses$ | async) || []" [header]="t('expenses')" #expenses></app-aggrigated-items>
+          <app-credit-payments [credits]="(ActiveCredits$ |async) || []" [header]="t('credits')" #credits [year]="currentYear" [accounts]="(Accounts$ |async) || []"></app-credit-payments>
+        </div>
+    </div>
+  </app-card>
+</div>
+
+<ng-template #headerTemplate>
+  <div class="card flex justify-content-end">
+    <div class="flex justify-content-center flex-column">
+      <p-calendar [(ngModel)]="date" view="year" dateFormat="yy" inputId="yearpicker" [showIcon]="true" [appendTo]="'body'" class="w-14rem" (onSelect)="onYearChange($event)"></p-calendar>
+    </div>
+  </div>
+</ng-template>

@@ -1,0 +1,40 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "budget.webapp-Local",
+      "preLaunchTask": "WebApp-Local",
+      "type": "chrome",
+      "request": "launch",
+      "url": "https://localhost:4200/"
+    },
+    {
+      "name": "budget.webapi-Local",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "budget.webapi-build",
+      "program": "${workspaceFolder}/WEB/server-api/ServerAPI/budget.webapi/bin/Debug/net7.0/budget.webapi.dll",
+      "cwd": "${workspaceFolder}/WEB/server-api/ServerAPI",
+      "console": "integratedTerminal",
+      "env": {
+        "ASPNETCORE_ENVIRONMENT": "Development"
+      }
+    },
+    {
+      "name": "docker-compose-up",
+      "type": "docker",
+      "preLaunchTask": "docker-compose-up",
+      "request": "launch",
+    }
+  ],
+  "compounds": [
+    {
+      "name": "budget-Local",
+      "configurations": [
+        "budget.webapp-Local",
+        "budget.webapi-Local",
+        "docker-compose-up"
+      ]
+    }
+  ]
+}

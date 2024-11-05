@@ -1,0 +1,12 @@
+<div class="px-2 h-full flex flex-wrap" *transloco="let t; read: 'settings'">
+  <div class="col-9">
+    <router-outlet></router-outlet>
+  </div>
+  <div class="col-3">
+    <app-card [header]="t('options')">
+      <div class="card flex justify-content-center w-full">
+        <p-panelMenu [model]="items"[className]="'w-full'" [multiple]="true"></p-panelMenu>
+    </div>
+    </app-card>
+  </div>
+</div>

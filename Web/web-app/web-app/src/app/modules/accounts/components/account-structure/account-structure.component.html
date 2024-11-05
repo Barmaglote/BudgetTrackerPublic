@@ -1,0 +1,9 @@
+<div class="w-full p-3">
+  <div *ngFor="let item of aggregatedData(); let last = last" class="w-full">
+    <div class="flex justify-content-between flex-wrap" *ngIf="item">
+      <div class="flex font-semibold">{{item?.currency}}</div>
+      <div class="flex" *ngIf="item?.currency">{{item?.quantitySum | currency:item?.currency:'symbol-narrow'}}</div>
+    </div>
+    <p-divider *ngIf="!last"></p-divider>
+  </div>
+</div>

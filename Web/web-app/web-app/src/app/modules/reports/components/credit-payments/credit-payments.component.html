@@ -1,0 +1,106 @@
+<p-table
+#tableRegularPayments
+[value]="credits"
+[tableStyle]="{ 'min-width': '50rem'}"
+[lazy]="true"
+[paginator]="false"
+selectionMode="single"
+styleClass="p-datatable p-datatable-sm w-full border-200 border-left-1 border-right-1"
+rowGroupMode="subheader"
+sortMode="single">
+  <ng-template pTemplate="caption">
+  <div class="flex w-full flex justify-content-between flex-wrap">
+    <div class="flex flex-wrap align-items-center px-2 text-2xl">
+      {{ header }}
+    </div>
+  </div>
+  </ng-template>
+  <ng-template pTemplate="header">
+    <tr class="text-center">
+      <th class="text-center border-right-1 w-12rem">{{'reports.category' | transloco}}</th>
+      <th class="text-center">{{'reports.jan' | transloco}}</th>
+      <th class="text-center">{{'reports.feb' | transloco}}</th>
+      <th class="text-center">{{'reports.mar' | transloco}}</th>
+      <th class="text-center">{{'reports.apr' | transloco}}</th>
+      <th class="text-center">{{'reports.may' | transloco}}</th>
+      <th class="text-center">{{'reports.jun' | transloco}}</th>
+      <th class="text-center">{{'reports.jul' | transloco}}</th>
+      <th class="text-center">{{'reports.aug' | transloco}}</th>
+      <th class="text-center">{{'reports.sep' | transloco}}</th>
+      <th class="text-center">{{'reports.oct' | transloco}}</th>
+      <th class="text-center">{{'reports.nov' | transloco}}</th>
+      <th class="text-center">{{'reports.dec' | transloco}}</th>
+      <th class="text-center border-left-1 w-9rem">{{'reports.total' | transloco}}</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-item>
+    <tr *ngIf="{currency: getCurrency(item)} as info">
+      <td class="text-left border-right-1 flex flex-column w-12rem">
+        <div>{{item.category}}</div>
+        <div class="text-sm">{{item.comment}}</div>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 1), actual: getPaymentPaidValue(item, 1), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 2), actual: getPaymentPaidValue(item, 2), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 3), actual: getPaymentPaidValue(item, 3), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 4), actual: getPaymentPaidValue(item, 4), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 5), actual: getPaymentPaidValue(item, 5), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 6), actual: getPaymentPaidValue(item, 6), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 7), actual: getPaymentPaidValue(item, 7), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 8), actual: getPaymentPaidValue(item, 8), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 9), actual: getPaymentPaidValue(item, 9), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 10), actual: getPaymentPaidValue(item, 10), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 11), actual: getPaymentPaidValue(item, 11), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center" *ngIf="{plan: getPaymentPlannedValue(item, 12), actual: getPaymentPaidValue(item, 12), currency: info.currency} as obs"
+        [class.bg-yellow-300]="obs.actual && obs.plan && obs.actual < obs.plan" [class.bg-green-300]="obs.actual && obs.plan && obs.actual >= obs.plan">
+        <ng-container *ngTemplateOutlet="itemInfo; context: { $implicit: obs }"></ng-container>
+      </td>
+      <td class="text-center border-left-1 w-9rem" *ngIf="{total: getPaymentTotalValue(item)} as obs">
+        <span *ngIf="obs.total">{{obs.total | currency: info.currency:'symbol-narrow'}}</span>
+      </td>
+    </tr>
+  </ng-template>
+</p-table>
+
+<ng-template #itemInfo let-item>
+  <span *ngIf="!item.actual">{{item.plan | currency: item.currency:'symbol-narrow'}}</span>
+  <span *ngIf="item.actual" [pTooltip]="tooltipContent" tooltipPosition="top" [class.text-white]="item?.actual && item.plan && item.actual >= item.plan">{{item.actual | currency: item.currency:'symbol-narrow'}}</span>
+  <ng-template #tooltipContent>
+    <div class="flex align-items-center flex-row min-w-20rem">
+      <i class="pi pi-info-circle" style="font-size: 1rem"></i>
+      <span class="ml-2">Actual: {{item.actual | currency: item.currency:'symbol-narrow'}}</span>
+      <span class="ml-2">Plan: {{item.plan | currency: item.currency:'symbol-narrow'}}</span>
+    </div>
+</ng-template>

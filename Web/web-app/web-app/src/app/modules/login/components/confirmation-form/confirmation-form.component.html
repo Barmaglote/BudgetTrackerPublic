@@ -1,0 +1,11 @@
+<form class="p-2 gap-2 flex flex-column" [formGroup]="confirmForm" (ngSubmit)="onSubmit()">
+  <label for="email" class="block text-900 font-medium mb-2">{{'login.email' | transloco}}</label>
+  <input id="email"
+    formControlName="email"
+    [class.ng-dirty]="confirmForm.get('email')?.hasError('required') && confirmForm.get('email')?.touched"
+    [class.ng-invalid]="confirmForm.get('email')?.hasError('required') && confirmForm.get('email')?.touched"
+    type="text" placeholder="Email address" pinputtext="" class="p-inputtext p-component p-element w-full mb-3 p-3">
+  <button pbutton="" pripple="" label="Sign In" class="p-element p-ripple w-full py-3 font-medium p-button p-component">
+    <span class="p-button-label">{{'login.confirm' | transloco}}</span><span class="p-ink"></span>
+  </button>
+</form>
